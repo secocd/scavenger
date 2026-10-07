@@ -118,3 +118,7 @@ h2 {
     background-color: #f200ff;
     color: white;
 }
+.about {
+    max-width: 600px;
+    line-height: 1.5;
+}
