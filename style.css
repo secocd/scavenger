@@ -178,3 +178,12 @@ hr {
     max-width: 600px;
     line-height: 1.5;
 }
+
+.stats {
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+.stats p {
+    margin-bottom: 20px;
+}
