@@ -7,18 +7,32 @@ body {
 h1 {
     color: rgb(0, 0, 0);
     font-size: 50px;
+    margin-top: 0;
+    margin-bottom: 35px;
 }
 
 h2 {
     color: rgb(255, 255, 255);
     background-color: rgb(103, 106, 82);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 3px 0;
 }
+
+hr {
+    border: 0;
+    border-top: 1px solid #aaaaaa;
+    margin: 20px 0;
+}
+
+
+/* COLLECTION */
 
 .collection {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 35px;
 }
 
 .cd {
@@ -27,11 +41,25 @@ h2 {
 
 .cd img {
     width: 250px;
+    display: block;
 }
+
+.cd h3 {
+    margin-top: 18px;
+    margin-bottom: 8px;
+}
+
+.cd p {
+    margin-top: 0;
+}
+
+
+/* ALBUM PAGES */
 
 .album-photo {
     width: 400px;
     max-width: 90%;
+    display: block;
 }
 
 .album-layout {
@@ -48,6 +76,40 @@ h2 {
     width: 500px;
 }
 
+
+/* ALBUM NAVIGATION */
+
+.album-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.album-nav a {
+    color: black;
+}
+
+.reshuffle-box {
+    padding: 6px 14px;
+
+    background-color: white;
+    border: 1px dashed #ffffff;
+
+    color: black;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.reshuffle-box:hover {
+    background-color: #f200ff;
+    color: white;
+}
+
+
+/* FULL REVIEWS */
+
 .review-box {
     display: block;
     width: 250px;
@@ -61,6 +123,7 @@ h2 {
     text-align: center;
     text-decoration: none;
     font-weight: bold;
+    box-sizing: border-box;
 }
 
 .review-box:hover {
@@ -68,9 +131,12 @@ h2 {
     color: rgb(252, 252, 252);
 }
 
+
+/* HOMEPAGE HEADER */
+
 .home-header {
     position: relative;
-    min-height: 210px;
+    min-height: 110px;
 }
 
 .top-boxes {
@@ -80,19 +146,19 @@ h2 {
 
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 
 .menu-box {
-    width: 250px;
-    padding: 15px;
+    width: 190px;
+    padding: 7px 10px;
 
-    border: 2px dashed #ffffff;
+    border: 1px dashed #ffffff;
     background-color: white;
 
     color: black;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     text-decoration: none;
 
@@ -104,25 +170,10 @@ h2 {
     background-color: #f200ff;
     color: white;
 }
-.album-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.reshuffle-box {
-    color: black;
-    text-decoration: none;
-    padding: 8px 15px;
-        border: 2px dashed #ffffff;
-    background-color: white;
 
-}
+/* ABOUT */
 
-.reshuffle-box:hover {
-    background-color: #f200ff;
-    color: white;
-}
 .about {
     max-width: 600px;
     line-height: 1.5;
