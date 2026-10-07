@@ -68,18 +68,19 @@ h2 {
     color: rgb(252, 252, 252);
 }
 
+.home-header {
+    position: relative;
+    min-height: 210px;
+}
+
 .top-boxes {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 0;
+    right: 0;
 
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
-    .home-header {
-    min-height: 190px;
-}
 }
 
 .menu-box {
