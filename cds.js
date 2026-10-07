@@ -93,7 +93,9 @@ const cds = [
 
         favouriteSongs: [
             "Drag",
-            "Lullaby"
+            "Lullaby",
+            "Down",
+            "Slide"
         ]
     },
 
@@ -106,7 +108,7 @@ const cds = [
         year: 1997,
         genre: "Electronic",
         style: "IDM, Downtempo",
-        rating: 8,
+        rating: 8.5,
         price: 1,
         where: "Berlin",
         when: "June 2026",
