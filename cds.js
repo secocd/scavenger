@@ -63,6 +63,8 @@ const cds = [
         where: "Berlin",
         when: "September 2025",
 
+        rare: true,
+        
         image: "images/swans-the burning world.png",
 
         notes: "I have only seen a Swans CD in the wild like twice in my life, and each time they were €20+. Online, I've seen them go for €50–€80. So finding this one the same day I moved to Berlin, while I was still trying to get into my flat, felt actually crazy. I'm also happy I found this particular album because it's pretty different from what Swans normally do. It resembles more the type of music Michael Gira would later release with Angels of Light.",
@@ -87,6 +89,8 @@ const cds = [
         price: 2,
         where: "Paris",
         when: "March 2026",
+
+        rare: true,  
 
         image: "images/low-i could live in hope.png",
 

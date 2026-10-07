@@ -2,69 +2,100 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>my rarest finds - scavenger</title>
+    <title>scavenger - rarest finds</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
+
+
+    <!-- PAGE HEADER -->
 
     <a href="index.html"><<< back to the pile</a>
 
     <h1>my rarest finds</h1>
 
-    <p>some of the harder-to-find CDs i've scavenged.</p>
+    <p>
+        some of the harder-to-find CDs i've scavenged.
+    </p>
 
-    <hr>
 
     <h2>rarest finds</h2>
 
 
-    <div class="collection">
+    <!-- RARE CDS ARE GENERATED AUTOMATICALLY -->
+
+    <div
+        class="collection"
+        id="rare-collection"
+    ></div>
 
 
-        <!-- SWANS -->
+    <!-- JAVASCRIPT -->
 
-        <div class="cd">
-
-            <a href="swans-the burning world.html">
-
-                <img
-                    src="images/swans-the burning world.png"
-                    alt="Swans - The Burning World"
-                >
-
-            </a>
-
-            <h3>Swans</h3>
-            <p>The Burning World</p>
-
-        </div>
+    <script src="cds.js"></script>
 
 
-        <!-- LOW -->
+    <script>
 
-        <div class="cd">
-
-            <a href="low-i could live in hope.html">
-
-                <img
-                    src="images/low-i could live in hope.png"
-                    alt="Low - I Could Live in Hope"
-                >
-
-            </a>
-
-            <h3>Low</h3>
-            <p>I Could Live in Hope</p>
-
-        </div>
+        const rareCollection =
+            document.getElementById("rare-collection");
 
 
-    </div>
+        const rareCDs =
+            cds.filter(function(cd) {
+
+                return cd.rare === true;
+
+            });
+
+
+        rareCDs.forEach(function(cd) {
+
+            const card =
+                document.createElement("div");
+
+
+            card.className = "cd";
+
+
+            card.innerHTML = `
+                <a href="album.html?id=${cd.id}">
+
+                    <img
+                        src="${cd.image}"
+                        alt="${cd.artist} - ${cd.album}"
+                    >
+
+                </a>
+
+                <h3>${cd.artist}</h3>
+
+                <p>${cd.album}</p>
+            `;
+
+
+            rareCollection.appendChild(card);
+
+        });
+
+
+        if (rareCDs.length === 0) {
+
+            rareCollection.innerHTML =
+                "<p>no rare finds added yet.</p>";
+
+        }
+
+    </script>
+
 
 </body>
 
