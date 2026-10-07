@@ -16,50 +16,111 @@
 <body>
 
 
-    <!-- WEBSITE HEADER -->
+    <!-- WEBSITE TITLE -->
 
     <div class="home-header">
 
         <h1>scavenger</h1>
 
-        <p></p>
+    </div>
 
 
-        <!-- TOP RIGHT MENU -->
+    <!-- ARCHIVE TOOLBAR -->
 
-        <div class="top-menu">
+    <div class="archive-toolbar">
 
-            <a href="stats.html" class="stats-box">
-                fun stats
+
+        <!-- ARCHIVE COUNT -->
+
+        <p class="collection-count">
+
+            <span id="collection-count">0</span>
+            CDs from my collection archived so far
+
+        </p>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="archive-menu">
+
+            <a href="stats.html" class="toolbar-box">
+                stats
             </a>
 
-            <div class="top-boxes">
+            <a
+                href="#"
+                class="toolbar-box"
+                onclick="randomCD(); return false;"
+            >
+                random CD
+            </a>
 
-                <a href="#" class="menu-box" onclick="randomCD(); return false;">
-                    discover a random CD
-                </a>
+            <a href="rarest-finds.html" class="toolbar-box">
+                rarest finds
+            </a>
 
-                <a href="rarest-finds.html" class="menu-box">
-                    my rarest finds
-                </a>
+            <a href="about.html" class="toolbar-box">
+                about
+            </a>
 
-                <a href="about.html" class="menu-box">
-                    about scavenger
-                </a>
+        </div>
 
-            </div>
+
+        <!-- SEARCH + SORT -->
+
+        <div class="search-sort">
+
+            <input
+                type="text"
+                id="search"
+                class="archive-search"
+                placeholder="search artist or album..."
+            >
+
+
+            <select
+                id="sort"
+                class="archive-sort"
+            >
+
+                <option value="default">
+                    original order
+                </option>
+
+                <option value="artist">
+                    artist A-Z
+                </option>
+
+                <option value="artist-reverse">
+                    artist Z-A
+                </option>
+
+                <option value="year-old">
+                    oldest album
+                </option>
+
+                <option value="year-new">
+                    newest album
+                </option>
+
+                <option value="price-low">
+                    lowest price
+                </option>
+
+                <option value="price-high">
+                    highest price
+                </option>
+
+                <option value="rating-high">
+                    highest rated
+                </option>
+
+            </select>
 
         </div>
 
     </div>
-
-
-    <!-- ARCHIVE COUNT -->
-
-    <p class="collection-count">
-        <span id="collection-count">0</span>
-        CDs from my collection archived so far
-    </p>
 
 
     <!-- ARCHIVE -->
@@ -67,11 +128,12 @@
     <h2>archive</h2>
 
 
-    <!-- CDS ARE GENERATED AUTOMATICALLY FROM cds.js -->
+    <!-- CDS ARE GENERATED AUTOMATICALLY -->
 
-    <div class="collection" id="collection">
-
-    </div>
+    <div
+        class="collection"
+        id="collection"
+    ></div>
 
 
     <!-- JAVASCRIPT -->

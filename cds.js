@@ -38,9 +38,10 @@ const cds = [
         when: "October 2026",
 
         image: "images/julee cruise-the voice of love.png",
+
         reviewPage: "julee-cruise-review.html",
 
-        notes: "Found this in a box of CDs at a flea market. I already loved Floating Into The Night, which got me to know about David Lynch and Twin Peaks, so buying it was an easy decision. I had never actually listened to this album before, but I recognised the cover and knew I had to get it. I've been listening to it mostly at night with my portable CD player, which honestly feels like the perfect way to listen to Julee Cruise.",
+        notes: "Found this in a box of CDs at a flea market. I already loved Floating Into The Night, which got me to know about David Lynch and Twin Peaks, so buying it was a no-brainer. I had never actually listened to this album before, but I recognised the cover and knew I had to get it. I've been listening to it mostly at night with my portable CD player, which honestly feels like the perfect way to listen to Julee Cruise.",
 
         favouriteSongs: [
             "Movin' In On You",
@@ -89,7 +90,7 @@ const cds = [
 
         image: "images/low-i could live in hope.png",
 
-        notes: "Shit, my hopes of finding this CD randomly were practically none. If in good condition it can be sold for around €200. Mine sadly has '1994' marked on the front cover but obviously that didn't stop me from getting it. I found the UK version which I think is more rare than the US ones. I discovered Low through their song Lullaby but fell in love with Drag.",
+        notes: "Shit, my hopes of finding this CD randomly were practically none. If in good condition it can be sold for around €200. Mine sadly has '1994' marked in the front cover but obviously that didn't stop me from getting it. I found the UK version which I think is more rare than the US ones. I discovered Low through their song Lullaby but fell in love with Drag.",
 
         favouriteSongs: [
             "Drag",
