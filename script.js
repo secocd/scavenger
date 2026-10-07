@@ -1,9 +1,10 @@
 function randomCD() {
 
-    const currentPage = window.location.pathname.split("/").pop();
+    const currentID =
+        new URLSearchParams(window.location.search).get("id");
 
     const possibleCDs = cds.filter(function(cd) {
-        return cd.page !== currentPage;
+        return cd.id !== currentID;
     });
 
     if (possibleCDs.length === 0) {
@@ -13,7 +14,10 @@ function randomCD() {
     const randomNumber =
         Math.floor(Math.random() * possibleCDs.length);
 
-    window.location.href = possibleCDs[randomNumber].page;
+    const randomAlbum = possibleCDs[randomNumber];
+
+    window.location.href =
+        "album.html?id=" + randomAlbum.id;
 }
 
 
@@ -23,7 +27,43 @@ const collectionCount =
     document.getElementById("collection-count");
 
 if (collectionCount) {
+
     collectionCount.textContent = cds.length;
+
+}
+
+
+/* BUILD ARCHIVE */
+
+const collection =
+    document.getElementById("collection");
+
+if (collection) {
+
+    cds.forEach(function(cd) {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "cd";
+
+        card.innerHTML = `
+            <a href="album.html?id=${cd.id}">
+                <img
+                    src="${cd.image}"
+                    alt="${cd.artist} - ${cd.album}"
+                >
+            </a>
+
+            <h3>${cd.artist}</h3>
+
+            <p>${cd.album}</p>
+        `;
+
+        collection.appendChild(card);
+
+    });
+
 }
 
 
@@ -53,23 +93,27 @@ const cityCount =
 
 if (totalCDs) {
 
-    const CDsWithPrices = cds.filter(function(cd) {
-        return cd.price !== null;
-    });
+    const CDsWithPrices =
+        cds.filter(function(cd) {
+            return cd.price !== null;
+        });
 
 
     /* TOTAL CDS */
 
-    totalCDs.textContent = cds.length;
+    totalCDs.textContent =
+        cds.length;
 
 
     /* TOTAL SPENT */
 
-    const spent = CDsWithPrices.reduce(function(total, cd) {
-        return total + cd.price;
-    }, 0);
+    const spent =
+        CDsWithPrices.reduce(function(total, cd) {
+            return total + cd.price;
+        }, 0);
 
-    totalSpent.textContent = "€" + spent;
+    totalSpent.textContent =
+        "€" + spent;
 
 
     /* AVERAGE PRICE */
@@ -81,6 +125,7 @@ if (totalCDs) {
 
         averagePrice.textContent =
             "€" + average.toFixed(2);
+
     }
 
 
@@ -97,6 +142,7 @@ if (totalCDs) {
 
         cheapestPrice.textContent =
             "€" + cheapest;
+
     }
 
 
@@ -113,31 +159,37 @@ if (totalCDs) {
 
         mostExpensivePrice.textContent =
             "€" + mostExpensive;
+
     }
 
 
     /* DIFFERENT ARTISTS */
 
-    const artists = new Set(
-        cds.map(function(cd) {
-            return cd.artist;
-        })
-    );
+    const artists =
+        new Set(
+            cds.map(function(cd) {
+                return cd.artist;
+            })
+        );
 
-    artistCount.textContent = artists.size;
+    artistCount.textContent =
+        artists.size;
 
 
     /* DIFFERENT CITIES */
 
-    const cities = new Set(
-        cds
-            .filter(function(cd) {
-                return cd.where !== "";
-            })
-            .map(function(cd) {
-                return cd.where;
-            })
-    );
+    const cities =
+        new Set(
+            cds
+                .filter(function(cd) {
+                    return cd.where !== "";
+                })
+                .map(function(cd) {
+                    return cd.where;
+                })
+        );
 
-    cityCount.textContent = cities.size;
+    cityCount.textContent =
+        cities.size;
+
 }

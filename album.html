@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>scavenger</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <div class="album-nav">
+
+        <a href="index.html"><<< back to the pile</a>
+
+        <a href="#" class="reshuffle-box" onclick="randomCD(); return false;">
+            shuffle
+        </a>
+
+    </div>
+
+
+    <h2>information</h2>
+
+
+    <div class="album-layout">
+
+        <div class="album-left">
+
+            <img
+                id="album-image"
+                class="album-photo"
+                src=""
+                alt=""
+            >
+
+            <p id="album-info"></p>
+
+        </div>
+
+
+        <div class="album-notes">
+
+            <h3>my notes:</h3>
+
+            <p id="album-notes-text"></p>
+
+            <p id="album-price"></p>
+
+            <p id="album-location"></p>
+
+            <p id="album-date"></p>
+
+            <p>
+                favourite songs:<br>
+                <span id="album-songs"></span>
+            </p>
+
+            <div id="review-container"></div>
+
+        </div>
+
+    </div>
+
+
+    <script src="cds.js"></script>
+    <script src="script.js"></script>
+
+
+    <script>
+
+        const params =
+            new URLSearchParams(window.location.search);
+
+        const id =
+            params.get("id");
+
+
+        const album =
+            cds.find(function(cd) {
+                return cd.id === id;
+            });
+
+
+        if (album) {
+
+            document.title =
+                album.artist + " - " + album.album;
+
+
+            document.getElementById("album-image").src =
+                album.image;
+
+            document.getElementById("album-image").alt =
+                album.artist + " - " + album.album;
+
+
+            document.getElementById("album-info").innerHTML =
+                "artist: " + album.artist + "<br>" +
+                "album: " + album.album + "<br>" +
+                "year: " + album.year + "<br>" +
+                "genre: " + album.genre + "<br>" +
+                "style: " + album.style + "<br><br>" +
+                "my rating: " + album.rating + "/10";
+
+
+            document.getElementById("album-notes-text").textContent =
+                album.notes;
+
+
+            document.getElementById("album-price").textContent =
+                "price paid for the CD: €" + album.price;
+
+
+            document.getElementById("album-location").textContent =
+                "where: " + album.where;
+
+
+            document.getElementById("album-date").textContent =
+                "when: " + album.when;
+
+
+            document.getElementById("album-songs").innerHTML =
+                "- " + album.favouriteSongs.join("<br>- ");
+
+
+            /* FULL REVIEW */
+
+            if (album.reviewPage) {
+
+                document.getElementById("review-container").innerHTML = `
+                    <a href="${album.reviewPage}" class="review-box">
+                        full review available!
+                    </a>
+                `;
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

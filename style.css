@@ -4,20 +4,37 @@ body {
     margin: 30px;
 }
 
+
+/* HEADINGS */
+
 h1 {
-    color: rgb(0, 0, 0);
+    color: black;
     font-size: 50px;
     margin-top: 0;
     margin-bottom: 35px;
 }
 
 h2 {
-    color: rgb(255, 255, 255);
+    color: white;
     background-color: rgb(103, 106, 82);
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 3px 0;
 }
+
+
+/* LINKS */
+
+a {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+
+/* HORIZONTAL LINES */
 
 hr {
     border: 0;
@@ -42,6 +59,15 @@ hr {
 .cd img {
     width: 250px;
     display: block;
+}
+
+.cd a {
+    color: black;
+    text-decoration: none;
+}
+
+.cd a:visited {
+    color: black;
 }
 
 .cd h3 {
@@ -90,6 +116,9 @@ hr {
     color: black;
 }
 
+
+/* SHUFFLE BUTTON */
+
 .reshuffle-box {
     padding: 6px 14px;
 
@@ -100,6 +129,7 @@ hr {
     text-decoration: none;
 
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .reshuffle-box:hover {
@@ -116,19 +146,20 @@ hr {
     margin-top: 40px;
     padding: 15px;
 
-    border: 2px dashed rgb(253, 253, 253);
-    background-color: #ffffff;
+    border: 2px dashed #fdfdfd;
+    background-color: white;
 
     color: black;
     text-align: center;
     text-decoration: none;
     font-weight: bold;
+
     box-sizing: border-box;
 }
 
 .review-box:hover {
     background-color: #f200ff;
-    color: rgb(252, 252, 252);
+    color: white;
 }
 
 
@@ -155,6 +186,9 @@ hr {
     gap: 5px;
 }
 
+
+/* MAIN MENU BUTTONS */
+
 .menu-box {
     width: 190px;
     padding: 7px 10px;
@@ -178,21 +212,8 @@ hr {
 }
 
 
-/* ABOUT */
+/* STATS BUTTON */
 
-.about {
-    max-width: 600px;
-    line-height: 1.5;
-}
-
-.stats {
-    max-width: 600px;
-    line-height: 1.5;
-}
-
-.stats p {
-    margin-bottom: 20px;
-}
 .stats-box {
     width: 70px;
     padding: 7px 10px;
@@ -206,6 +227,7 @@ hr {
     text-align: center;
     text-decoration: none;
 
+    cursor: pointer;
     box-sizing: border-box;
 }
 
@@ -214,10 +236,25 @@ hr {
     color: white;
 }
 
+
+/* ARCHIVE COUNTER */
+
 .collection-count {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+
+/* ABOUT PAGE */
+
+.about {
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+
+/* STATS PAGE */
+
 .stats {
     max-width: 600px;
     line-height: 1.5;
