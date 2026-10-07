@@ -263,3 +263,98 @@ hr {
 .stats p {
     margin-bottom: 20px;
 }
+
+/* STATS PAGE */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+
+    width: 100%;
+    margin-top: 25px;
+}
+
+.stat-box {
+    min-height: 120px;
+    padding: 18px;
+
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+
+    box-sizing: border-box;
+    cursor: default;
+
+    transition: background-color 0.15s;
+}
+
+
+
+/* TEXT */
+
+.stat-label {
+    font-size: 15px;
+}
+
+.stat-box strong {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.stat-small {
+    font-size: 13px;
+}
+
+
+/* €3 RULE */
+
+.stat-highlight {
+    background-color:#f200ff;
+    color: white;
+    border: 1px dashed #ffffff;
+}
+
+.stat-highlight:hover {
+    background-color: #f200ff;
+    color: white;
+    border: 1px dashed #ffffff;
+}
+
+
+/* MOST FOUND CITY */
+
+.stat-wide {
+    grid-column: span 2;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 1000px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-wide {
+        grid-column: span 2;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-wide {
+        grid-column: span 1;
+    }
+
+}

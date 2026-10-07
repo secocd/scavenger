@@ -1,3 +1,5 @@
+/* RANDOM CD */
+
 function randomCD() {
 
     const currentID =
@@ -14,7 +16,8 @@ function randomCD() {
     const randomNumber =
         Math.floor(Math.random() * possibleCDs.length);
 
-    const randomAlbum = possibleCDs[randomNumber];
+    const randomAlbum =
+        possibleCDs[randomNumber];
 
     window.location.href =
         "album.html?id=" + randomAlbum.id;
@@ -28,7 +31,8 @@ const collectionCount =
 
 if (collectionCount) {
 
-    collectionCount.textContent = cds.length;
+    collectionCount.textContent =
+        cds.length;
 
 }
 
@@ -191,5 +195,161 @@ if (totalCDs) {
 
     cityCount.textContent =
         cities.size;
+
+}
+
+
+/* SCAVENGER STATS */
+
+const underThreeCount =
+    document.getElementById("under-three-count");
+
+const pricedCDs =
+    document.getElementById("priced-cds");
+
+const threeEuroSuccess =
+    document.getElementById("three-euro-success");
+
+const oneEuroFinds =
+    document.getElementById("one-euro-finds");
+
+const twoEuroFinds =
+    document.getElementById("two-euro-finds");
+
+const threeEuroFinds =
+    document.getElementById("three-euro-finds");
+
+const overThreeFinds =
+    document.getElementById("over-three-finds");
+
+const topCity =
+    document.getElementById("top-city");
+
+const topCityCount =
+    document.getElementById("top-city-count");
+
+
+if (underThreeCount) {
+
+    const CDsWithPrices =
+        cds.filter(function(cd) {
+            return cd.price !== null;
+        });
+
+
+    /* NUMBER OF PRICED CDS */
+
+    pricedCDs.textContent =
+        CDsWithPrices.length;
+
+
+    /* €3 RULE */
+
+    const underThree =
+        CDsWithPrices.filter(function(cd) {
+            return cd.price <= 3;
+        });
+
+    underThreeCount.textContent =
+        underThree.length;
+
+
+    /* €3 RULE SUCCESS RATE */
+
+    if (CDsWithPrices.length > 0) {
+
+        const successRate =
+            (underThree.length / CDsWithPrices.length) * 100;
+
+        threeEuroSuccess.textContent =
+            successRate.toFixed(0) + "%";
+
+    }
+
+
+    /* €1 FINDS */
+
+    oneEuroFinds.textContent =
+        CDsWithPrices.filter(function(cd) {
+            return cd.price === 1;
+        }).length;
+
+
+    /* €2 FINDS */
+
+    twoEuroFinds.textContent =
+        CDsWithPrices.filter(function(cd) {
+            return cd.price === 2;
+        }).length;
+
+
+    /* €3 FINDS */
+
+    threeEuroFinds.textContent =
+        CDsWithPrices.filter(function(cd) {
+            return cd.price === 3;
+        }).length;
+
+
+    /* OVER €3 FINDS */
+
+    if (overThreeFinds) {
+
+        overThreeFinds.textContent =
+            CDsWithPrices.filter(function(cd) {
+                return cd.price > 3;
+            }).length;
+
+    }
+
+
+    /* MOST FOUND CITY */
+
+    const cityTotals = {};
+
+
+    CDsWithPrices.forEach(function(cd) {
+
+        if (cd.where !== "") {
+
+            if (!cityTotals[cd.where]) {
+                cityTotals[cd.where] = 0;
+            }
+
+            cityTotals[cd.where]++;
+
+        }
+
+    });
+
+
+    let mostFoundCity = "";
+    let mostFoundCityCount = 0;
+
+
+    for (const city in cityTotals) {
+
+        if (cityTotals[city] > mostFoundCityCount) {
+
+            mostFoundCity =
+                city;
+
+            mostFoundCityCount =
+                cityTotals[city];
+
+        }
+
+    }
+
+
+    if (mostFoundCity !== "") {
+
+        topCity.textContent =
+            mostFoundCity;
+
+        topCityCount.textContent =
+            mostFoundCityCount;
+
+    }
 
 }

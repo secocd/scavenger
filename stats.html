@@ -12,54 +12,248 @@
 
 </head>
 
+
 <body>
 
     <a href="index.html"><<< back to the pile</a>
 
+
     <h2>stats</h2>
 
-    <div class="stats">
 
-        <p>
-            CDs archived:
-            <strong id="total-cds">0</strong>
-        </p>
+    <div class="stats-grid">
 
-        <p>
-            total spent:
-            <strong id="total-spent">€0</strong>
-        </p>
 
-        <p>
-            average price:
-            <strong id="average-price">€0</strong>
-        </p>
+        <!-- CDS ARCHIVED -->
 
-        <p>
-            cheapest find:
-            <strong id="cheapest-price">€0</strong>
-        </p>
+        <div class="stat-box">
 
-        <p>
-            most expensive find:
-            <strong id="most-expensive-price">€0</strong>
-        </p>
+            <span class="stat-label">
+                CDs archived
+            </span>
 
-        <p>
-            different artists:
-            <strong id="artist-count">0</strong>
-        </p>
+            <strong id="total-cds">
+                0
+            </strong>
 
-        <p>
-            different cities:
-            <strong id="city-count">0</strong>
-        </p>
+        </div>
+
+
+        <!-- TOTAL SPENT -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                total spent
+            </span>
+
+            <strong id="total-spent">
+                €0
+            </strong>
+
+        </div>
+
+
+        <!-- AVERAGE PRICE -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                average price
+            </span>
+
+            <strong id="average-price">
+                €0
+            </strong>
+
+        </div>
+
+
+        <!-- CHEAPEST FIND -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                cheapest find
+            </span>
+
+            <strong id="cheapest-price">
+                €0
+            </strong>
+
+        </div>
+
+
+        <!-- MOST EXPENSIVE FIND -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                most expensive find
+            </span>
+
+            <strong id="most-expensive-price">
+                €0
+            </strong>
+
+        </div>
+
+
+        <!-- DIFFERENT ARTISTS -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                different artists
+            </span>
+
+            <strong id="artist-count">
+                0
+            </strong>
+
+        </div>
+
+
+        <!-- DIFFERENT CITIES -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                different cities
+            </span>
+
+            <strong id="city-count">
+                0
+            </strong>
+
+        </div>
+
+
+        <!-- MOST FOUND CITY -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                most found city
+            </span>
+
+            <strong id="top-city">
+                none yet
+            </strong>
+
+            <span class="stat-small">
+                <span id="top-city-count">0</span> CDs
+            </span>
+
+        </div>
+
+
+        <!-- €3 RULE -->
+
+        <div class="stat-box stat-highlight">
+
+            <span class="stat-label">
+                €3 rule
+            </span>
+
+            <strong>
+                <span id="under-three-count">0</span>
+                /
+                <span id="priced-cds">0</span>
+            </strong>
+
+            <span class="stat-small">
+                CDs bought for €3 or less
+            </span>
+
+        </div>
+
+
+        <!-- SUCCESS RATE -->
+
+        <div class="stat-box stat-highlight">
+
+            <span class="stat-label">
+                success rate
+            </span>
+
+            <strong id="three-euro-success">
+                0%
+            </strong>
+
+            <span class="stat-small">
+                under the €3 rule
+            </span>
+
+        </div>
+
+
+        <!-- €1 FINDS -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                €1 finds
+            </span>
+
+            <strong id="one-euro-finds">
+                0
+            </strong>
+
+        </div>
+
+
+        <!-- €2 FINDS -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                €2 finds
+            </span>
+
+            <strong id="two-euro-finds">
+                0
+            </strong>
+
+        </div>
+
+
+        <!-- €3 FINDS -->
+
+        <div class="stat-box">
+
+            <span class="stat-label">
+                €3 finds
+            </span>
+
+            <strong id="three-euro-finds">
+                0
+            </strong>
+
+        </div>
+
+        <!-- €3+ FINDS -->
+
+<div class="stat-box">
+
+    <span class="stat-label">
+        over €3 (breaking the rule)
+    </span>
+
+    <strong id="over-three-finds">
+        0
+    </strong>
+
+</div>
 
     </div>
 
 
+    <!-- JAVASCRIPT -->
+
     <script src="cds.js"></script>
     <script src="script.js"></script>
+
 
 </body>
 
