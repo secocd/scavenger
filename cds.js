@@ -64,7 +64,7 @@ const cds = [
         when: "September 2025",
 
         rare: true,
-        
+
         image: "images/swans-the burning world.png",
 
         notes: "I have only seen a Swans CD in the wild like twice in my life, and each time they were €20+. Online, I've seen them go for €50–€80. So finding this one the same day I moved to Berlin, while I was still trying to get into my flat, felt actually crazy. I'm also happy I found this particular album because it's pretty different from what Swans normally do. It resembles more the type of music Michael Gira would later release with Angels of Light.",
@@ -128,6 +128,52 @@ const cds = [
             "The Girl With The Fairytale Dream",
             "No-one In The World"
         ]
-    }
+    },
+
+    {
+    id: "tim buckley-lorca",
+
+    artist: "Tim Buckley",
+    album: "Lorca",
+    year: 1970,
+    genre: "Folk",
+    style: "Avantgarde, Jazz",
+    rating: 6.5,
+    price: 2,
+    where: "Berlin",
+    when: "September 2026",
+
+    image: "images/tim buckley-lorca.png",
+
+notes: "I didn't know about this album until I found it in a suitcase full of CDs at a flea market. The guy selling them was super nice, and chatted with him for a while. I ended up buying about 10 more CDs from him. After the first listen, I was instantly blown away by Driftin'. It literally made me drift off into another world. The album itself might not be as great or as well-known as some of Tim Buckley's other work, but that song alone makes it worth listening to.",
+    favouriteSongs: [
+        "Driftin'",
+
+    ]
+},
+
+{
+    id: "swirlies-blonder tongue audio baton",
+
+    artist: "Swirlies",
+    album: "Blonder Tongue Audio Baton",
+    year: 1993,
+    genre: "Rock",
+    style: "Shoegaze, Lo-Fi, Indie",
+    rating: 7,
+    price: 1,
+    where: "Vienna",
+    when: "January 2026",
+
+    image: "images/swirlies-blonder tongue audio baton.png",
+
+notes: "I used to listen to Tall Ships from their album What To Do About Them a lot, so I was already familiar with Swirlies when I came across this CD in a shop in Vienna. It didn't have a price tag, but the seller gave me a good deal since I was buying a few CDs. I had no idea it was actually worth so much, which made the find even better.",
+    favouriteSongs: [
+        Pancake,
+        
+    ]
+},
+
+    
 
 ];

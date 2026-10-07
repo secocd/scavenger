@@ -169,42 +169,34 @@ hr {
 /* COLLECTION */
 
 .collection {
-    display: flex;
-    flex-wrap: wrap;
-
+    display: grid;
+    grid-template-columns: repeat(5, 250px);
     justify-content: center;
-
     gap: 35px;
 }
-
 
 .cd {
     width: 250px;
 }
 
-
 .cd img {
-    width: 250px;
+    width: 100%;
     display: block;
 }
-
 
 .cd a {
     color: black;
     text-decoration: none;
 }
 
-
 .cd a:visited {
     color: black;
 }
-
 
 .cd h3 {
     margin-top: 18px;
     margin-bottom: 8px;
 }
-
 
 .cd p {
     margin-top: 0;
