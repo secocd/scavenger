@@ -139,11 +139,17 @@ hr {
     min-height: 110px;
 }
 
-.top-boxes {
+.top-menu {
     position: absolute;
     top: 0;
     right: 0;
 
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.top-boxes {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -186,4 +192,24 @@ hr {
 
 .stats p {
     margin-bottom: 20px;
+}
+.stats-box {
+    width: 70px;
+    padding: 7px 10px;
+
+    border: 1px dashed #ffffff;
+    background-color: white;
+
+    color: black;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+
+    box-sizing: border-box;
+}
+
+.stats-box:hover {
+    background-color: #f200ff;
+    color: white;
 }

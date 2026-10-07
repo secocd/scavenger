@@ -20,3 +20,11 @@ function randomCD() {
 
     window.location.href = possibleCDs[randomNumber];
 }
+
+const collectionCount = document.getElementById("collection-count");
+
+if (collectionCount) {
+    const numberOfCDs = document.querySelectorAll(".cd").length;
+
+    collectionCount.textContent = numberOfCDs;
+}
