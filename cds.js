@@ -231,7 +231,12 @@ notes: "Found this one in a music store with CDs piled up all over the floor. Wh
     image: "images/ween-the mollusk.png",
 
 notes: "Found this one in a music store in Berlin where prices are usually on the higher end, so I was surprised to see it going for relatively cheap. I still ended up breaking my €3 rule, but considering how rare this CD is, I couldn't really leave it behind. Finding a Ween album in the wild is already exciting enough, let alone The Mollusk. Definitely one of those exceptions I'm happy to make.",
-    favouriteSongs: []
+    favouriteSongs: [
+        "It's Gonna Be (Alright)",
+        "Buckingham Green",
+        "Cold Blows The Wind",
+        "Ocean Man",
+    ]
 },
 
 
@@ -255,9 +260,85 @@ notes: "Found this one in a music store in Berlin where prices are usually on th
 
 notes: "Found this one sitting in a box at a record shop in Vienna. My eyes lit up when I spotted Ween on the spine. There was no price tag, so I asked the guy how much he wanted for it. He offered it to me for €1, which I obviously couldn't turn down. I already knew If You Could Save Yourself (You'd Save Us All) and really liked it, so I was excited to finally listen to the whole album. What I love about Ween is how goofy and ridiculous their music can be while still being incredibly well made. They jump between completely different genres and somehow manage to pull them all off. It's funny how a band that often sounds like they're just messing around can make such genuinely great music.",
     favouriteSongs: [
-         
+         "Tried And True",
+         "If You Could Save Yourself (You'd Save Us All)",
+         "Captain",
+         "Chocolate Town",
+         "The Argus",
+         "Its' Gonne Be A Long Night"
+
     ]
 },
 
+{
+    id: "the hair and skin trading company-jo in nine g hell",
+
+    artist: "The Hair And Skin Trading Company",
+    album: "Jo In Nine G Hell",
+    year: 1992,
+    genre: "Rock",
+    style: "Space, Psychedelic, Avantgarde",
+    rating: 7.5,
+    price: 1,
+    marketValue: 6,
+    where: "Berlin",
+    when: "June 2026",
+
+    image: "images/the hair and skin trading company-jo in nine g hell.png",
+
+notes: "Found this one at a flea market where a guy had something like 15 crates full of CDs. I'd never heard of the band before, but the cover caught my attention, so I decided to give it a chance. Turned out to be a great decision. The album has this dark, strange and mysterious atmosphere that I really like, and Torque especially stood out to me. Definitely one of those finds that makes digging through endless boxes worth it.",
+    favouriteSongs: [
+       "Torque",
+       "Pipeline",
+       "Monkies", 
+    ]
+},
+
+{
+    id: "wayne shorter-speak no evil",
+
+    artist: "Wayne Shorter",
+    album: "Speak No Evil",
+    year: 1966,
+    genre: "Jazz",
+    style: "Post Bop, Hard Bop, Modal",
+    rating: 7.5,
+    price: 2,
+    marketValue: 8,
+    where: "Berlin",
+    when: "May 2026",
+
+    image: "images/wayne shorter-speak no evil.png",
+
+notes: "I'd been looking for this CD for ages, but I rarely came across it, and whenever I did, it was way too expensive. Then one day at a music store, I decided to check underneath the table where all the CDs were displayed. After digging around for a bit, there it was. Sometimes you just have to look where nobody else bothers to. That's dedication to the game!",
+    favouriteSongs: [
+        "Infant Eyes",
+         "Dance Cadaverous",
+
+    ]
+},
+
+{
+    id: "massive attack-protection",
+
+    artist: "Massive Attack",
+    album: "Protection",
+    year: 1994,
+    genre: "Electronic",
+    style: "Trip Hop, Downtempo, Dub",
+    rating: 9,
+    price: 1,
+    marketValue: 4,
+    where: "Leamington Spa",
+    when: "June 2024",
+
+    image: "images/massive attack-protection.png",
+
+    reviewPage: "massive-attack-protection-review.html",
+
+    notes: "",
+
+    favouriteSongs: []
+},
 
 ];
