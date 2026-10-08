@@ -336,9 +336,66 @@ notes: "I'd been looking for this CD for ages, but I rarely came across it, and 
 
     reviewPage: "massive-attack-protection-review.html",
 
-    notes: "",
+notes: "My parents introduced me to Massive Attack when I was younger, starting with Teardrop from Mezzanine. I didn't really get into them at first, but now I really like them. I'd only heard Karmacoma from Protection before, and it hadn't really clicked with me. When I finally listened to the whole album, I was surprised by how much I liked it. Everything flows together so well, and I love how they mix trip-hop, dub and all these different sounds without ever getting repetitive. Definitely an album that made me appreciate Massive Attack even more.",
+    favouriteSongs: [
+        "Protection",
+        "Better Things",
+        "Euro Child",
+        "Karmacoma"
+    ]
+},
 
-    favouriteSongs: []
+{
+    id: "elliott smith-either or",
+
+    artist: "Elliott Smith",
+    album: "Either / Or",
+    year: 1997,
+    genre: "Rock",
+    style: "Folk, Indie",
+    rating: 10,
+    price: 3,
+    marketValue: 15,
+    where: "Berlin",
+    when: "November 2024",
+
+    image: "images/elliott smith-either or.png",
+
+notes: "A friend sent me a few songs from this album years ago, but I didn't really like them at first. Then, a couple of years later, I somehow found myself listening to Elliott Smith again. I don't know what changed, but I became completely obsessed with his music. I would listen to all his albums over and over, and Either / Or quickly became one of my favourites. So finding this CD at a flea market made me really happy, especially since I rarely come across Elliott Smith CDs in the wild.",
+    favouriteSongs: [
+       "Rose Parade",
+       "Alameda",
+       "2:45 AM",
+       "Between The Bars",
+       "Say Yes",
+       "Ballad Of Big Nothing",
+       "Speed Trials", 
+    ]
+},
+
+{
+    id: "brokeback-field recordings",
+
+    artist: "Brokeback",
+    album: "Field Recordings from the Cook County Water Table",
+    year: 1999,
+    genre: "Rock",
+    style: "Post Rock",
+    rating: null,
+    price: 5,
+    marketValue: 10,
+    where: "Paris",
+    when: "January 2026",
+
+    image: "images/brokeback-field recordings.png",
+
+notes: "I discovered this album through Tortoise, one of my favourite post-rock bands. Brokeback is the side project of Tortoise's bassist, and you can definitely hear some similarities between the two. The music is very atmospheric and minimal, with these beautiful, repetitive basslines that slowly develop throughout the songs. I really like how it creates a whole mood without needing to do too much. It's the kind of album you can easily get lost in, especially when listening with headphones.",
+    favouriteSongs: [
+        "Another Routine Day Breaks",
+        "Seiche 2",
+        "Returns To The Orange Grove",
+        "The Great Banks"
+    ]
 },
 
 ];

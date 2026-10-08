@@ -696,7 +696,7 @@ if (marketValueElement) {
     }, 0);
 
     marketValueElement.textContent =
-        "€" + totalMarketValue.toFixed(2);
+        "€" + totalMarketValue.toFixed(0);
 
 }
 
