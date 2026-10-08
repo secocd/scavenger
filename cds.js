@@ -230,8 +230,7 @@ notes: "Found this one in a music store with CDs piled up all over the floor. Wh
 
     image: "images/ween-the mollusk.png",
 
-    notes: "",
-
+notes: "Found this one in a music store in Berlin where prices are usually on the higher end, so I was surprised to see it going for relatively cheap. I still ended up breaking my €3 rule, but considering how rare this CD is, I couldn't really leave it behind. Finding a Ween album in the wild is already exciting enough, let alone The Mollusk. Definitely one of those exceptions I'm happy to make.",
     favouriteSongs: []
 },
 
@@ -254,9 +253,10 @@ notes: "Found this one in a music store with CDs piled up all over the floor. Wh
 
     image: "images/ween-quebec.png",
 
-    notes: "",
-
-    favouriteSongs: []
+notes: "Found this one sitting in a box at a record shop in Vienna. My eyes lit up when I spotted Ween on the spine. There was no price tag, so I asked the guy how much he wanted for it. He offered it to me for €1, which I obviously couldn't turn down. I already knew If You Could Save Yourself (You'd Save Us All) and really liked it, so I was excited to finally listen to the whole album. What I love about Ween is how goofy and ridiculous their music can be while still being incredibly well made. They jump between completely different genres and somehow manage to pull them all off. It's funny how a band that often sounds like they're just messing around can make such genuinely great music.",
+    favouriteSongs: [
+         
+    ]
 },
 
 

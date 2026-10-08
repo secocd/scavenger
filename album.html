@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,12 +13,13 @@
 
 </head>
 
-
 <body>
+
+    <!-- ALBUM NAVIGATION -->
 
     <div class="album-nav">
 
-        <a href="index.html"><<< back to the pile</a>
+        <a href="index.html">&lt;&lt;&lt; back to the pile</a>
 
         <a href="#" class="reshuffle-box" onclick="randomCD(); return false;">
             shuffle
@@ -25,6 +27,8 @@
 
     </div>
 
+
+    <!-- INFORMATION -->
 
     <h2>information</h2>
 
@@ -45,6 +49,8 @@
         </div>
 
 
+        <!-- ALBUM NOTES -->
+
         <div class="album-notes">
 
             <h3>my notes:</h3>
@@ -52,6 +58,10 @@
             <p id="album-notes-text"></p>
 
             <p id="album-price"></p>
+
+            <!-- MARKET VALUE FOR RARE CDS -->
+
+            <p id="album-market-value" style="display: none;"></p>
 
             <p id="album-location"></p>
 
@@ -62,6 +72,8 @@
                 <span id="album-songs"></span>
             </p>
 
+            <!-- FULL REVIEW -->
+
             <div id="review-container"></div>
 
         </div>
@@ -69,18 +81,21 @@
     </div>
 
 
+    <!-- JAVASCRIPT -->
+
     <script src="cds.js"></script>
     <script src="script.js"></script>
 
 
     <script>
 
+        /* FIND CURRENT ALBUM */
+
         const params =
             new URLSearchParams(window.location.search);
 
         const id =
             params.get("id");
-
 
         const album =
             cds.find(function(cd) {
@@ -90,9 +105,13 @@
 
         if (album) {
 
+            /* PAGE TITLE */
+
             document.title =
                 album.artist + " - " + album.album;
 
+
+            /* ALBUM IMAGE */
 
             document.getElementById("album-image").src =
                 album.image;
@@ -101,51 +120,120 @@
                 album.artist + " - " + album.album;
 
 
+            /* ALBUM INFORMATION */
+
             document.getElementById("album-info").innerHTML =
                 "artist: " + album.artist + "<br>" +
                 "album: " + album.album + "<br>" +
-                "year: " + album.year + "<br>" +
+                "year: " + (album.year ?? "not rated") + "<br>" +
                 "genre: " + album.genre + "<br>" +
                 "style: " + album.style + "<br><br>" +
-                "my rating: " + album.rating + "/10";
+                "my rating: " +
+                (album.rating == null ? "not rated yet" : album.rating + "/10");
 
+
+            /* PERSONAL NOTES */
 
             document.getElementById("album-notes-text").textContent =
-                album.notes;
+                album.notes || "";
 
+
+            /* PRICE PAID */
 
             document.getElementById("album-price").textContent =
-                "price paid for the CD: €" + album.price;
+                "price paid for the CD: " +
+                (typeof album.price === "number"
+                    ? "€" + album.price
+                    : "not recorded");
 
+
+            /* MARKET VALUE FOR RARE CDS */
+
+            const marketValueElement =
+                document.getElementById("album-market-value");
+
+            if (
+                album.rare === true &&
+                typeof album.marketValue === "number"
+            ) {
+
+                marketValueElement.textContent =
+                    "estimated market value: €" + album.marketValue;
+
+                marketValueElement.style.display = "block";
+
+            } else {
+
+                marketValueElement.style.display = "none";
+
+            }
+
+
+            /* LOCATION */
 
             document.getElementById("album-location").textContent =
-                "where: " + album.where;
+                "where: " + (album.where || "not recorded");
 
+
+            /* DATE FOUND */
 
             document.getElementById("album-date").textContent =
-                "when: " + album.when;
+                "when: " + (album.when || "not recorded");
 
 
-            document.getElementById("album-songs").innerHTML =
-                "- " + album.favouriteSongs.join("<br>- ");
+            /* FAVOURITE SONGS */
+
+            const songsElement =
+                document.getElementById("album-songs");
+
+            if (
+                Array.isArray(album.favouriteSongs) &&
+                album.favouriteSongs.length > 0
+            ) {
+
+                songsElement.textContent =
+                    album.favouriteSongs
+                        .map(function(song) {
+                            return "- " + song;
+                        })
+                        .join("\n");
+
+                songsElement.style.whiteSpace = "pre-line";
+
+            } else {
+
+                songsElement.textContent =
+                    "not added yet";
+
+            }
 
 
             /* FULL REVIEW */
 
             if (album.reviewPage) {
 
-                document.getElementById("review-container").innerHTML = `
-                    <a href="${album.reviewPage}" class="review-box">
-                        full review available!
-                    </a>
-                `;
+                const reviewLink =
+                    document.createElement("a");
+
+                reviewLink.href = album.reviewPage;
+                reviewLink.className = "review-box";
+                reviewLink.textContent = "full review available!";
+
+                document.getElementById("review-container")
+                    .appendChild(reviewLink);
 
             }
+
+        } else {
+
+            /* ALBUM NOT FOUND */
+
+            document.getElementById("album-notes-text").textContent =
+                "Album not found. Please return to the archive.";
 
         }
 
     </script>
-
 
 </body>
 
