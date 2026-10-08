@@ -678,4 +678,26 @@ if (underThreeCount) {
 
     }
 
+    /* ESTIMATED MARKET VALUE */
+
+const marketValueElement =
+    document.getElementById("market-value");
+
+if (marketValueElement) {
+
+    const totalMarketValue = cds.reduce(function(total, cd) {
+
+        if (typeof cd.marketValue === "number") {
+            return total + cd.marketValue;
+        }
+
+        return total;
+
+    }, 0);
+
+    marketValueElement.textContent =
+        "€" + totalMarketValue.toFixed(2);
+
+}
+
 }

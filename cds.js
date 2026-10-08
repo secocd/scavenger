@@ -10,6 +10,7 @@ const cds = [
         style: "Art Rock",
         rating: 7.5,
         price: 3,
+        marketValue: 6,
         where: "Berlin",
         when: "September 2026",
 
@@ -34,6 +35,7 @@ const cds = [
         style: "Dream Pop, Downtempo",
         rating: 8,
         price: 2,
+        marketValue: 9,
         where: "Berlin",
         when: "October 2026",
 
@@ -60,6 +62,7 @@ const cds = [
         style: "Goth, Folk",
         rating: 7,
         price: 4,
+        marketValue: 70,
         where: "Berlin",
         when: "September 2025",
 
@@ -87,6 +90,7 @@ const cds = [
         style: "Slowcore",
         rating: 9,
         price: 2,
+        marketValue: 85,
         where: "Paris",
         when: "March 2026",
 
@@ -115,6 +119,7 @@ const cds = [
         style: "IDM, Downtempo",
         rating: 8.5,
         price: 1,
+        marketValue: 5,
         where: "Berlin",
         when: "June 2026",
 
@@ -140,6 +145,7 @@ const cds = [
     style: "Avantgarde, Jazz",
     rating: 6.5,
     price: 2,
+    marketValue: 8,
     where: "Berlin",
     when: "September 2026",
 
@@ -162,18 +168,96 @@ notes: "I didn't know about this album until I found it in a suitcase full of CD
     style: "Shoegaze, Lo-Fi, Indie",
     rating: 7,
     price: 1,
+    marketValue: 60,
     where: "Vienna",
     when: "January 2026",
+
+    rare: true,
 
     image: "images/swirlies-blonder tongue audio baton.png",
 
 notes: "I used to listen to Tall Ships from their album What To Do About Them a lot, so I was already familiar with Swirlies when I came across this CD in a shop in Vienna. It didn't have a price tag, but the seller gave me a good deal since I was buying a few CDs. I had no idea it was actually worth so much, which made the find even better.",
     favouriteSongs: [
-        Pancake,
-        
+        "Pancake",
+        "His Love Just Washed Away",
     ]
 },
 
+{
+    id: "unwound-leaves turn inside you",
+
+    artist: "Unwound",
+    album: "Leaves Turn Inside You",
+    year: 2001,
+    genre: "Rock",
+    style: "Post-Hardcore, Post-Rock, Math Rock",
+    rating: 8.5,
+    price: 3,
+    marketValue: 35,
+    where: "Berlin",
+    when: "October 2025",
+
+    rare: true,
+
+    image: "images/unwound-leaves turn inside you.png",
+
+notes: "Found this one in a music store with CDs piled up all over the floor. While I was digging through one of the stacks, my girlfriend started spelling out a band name. When I realised she was trying to say Unwound, I couldn't believe it. Definitely not something I expected to come across at all.",    
+
+        favouriteSongs: [
+        "Below The Salt",
+        "Off This Century",
+        "October All Over",
     
+
+    ]
+},
+    
+{
+    id: "ween-the mollusk",
+
+    artist: "Ween",
+    album: "The Mollusk",
+    year: 1997,
+    genre: "Electronic, Rock",
+    style: "Alternative, Psychedelic",
+    rating: 7.5,
+    price: 5,
+    marketValue: 60,
+    where: "Berlin",
+    when: "June 2026",
+
+    rare: true,
+
+    image: "images/ween-the mollusk.png",
+
+    notes: "",
+
+    favouriteSongs: []
+},
+
+
+{
+    id: "ween-quebec",
+
+    artist: "Ween",
+    album: "Quebec",
+    year: 2003,
+    genre: "Electronic, Rock",
+    style: "Alternative, Indie",
+    rating: 9,
+    price: 1,
+    marketValue: 50,
+    where: "Vienna",
+    when: "January 2026",
+
+    rare: true,
+
+    image: "images/ween-quebec.png",
+
+    notes: "",
+
+    favouriteSongs: []
+},
+
 
 ];
