@@ -1,67 +1,222 @@
-/* RANDOM CD */
+
+/* =========================================
+   RANDOM CD
+========================================= */
 
 function randomCD() {
+
+    if (typeof cds === "undefined" || cds.length === 0) {
+        return;
+    }
 
     const currentID =
         new URLSearchParams(window.location.search).get("id");
 
-
-    const possibleCDs =
-        cds.filter(function(cd) {
-
-            return cd.id !== currentID;
-
-        });
-
+    const possibleCDs = cds.filter(function(cd) {
+        return cd.id !== currentID;
+    });
 
     if (possibleCDs.length === 0) {
         return;
     }
 
-
     const randomNumber =
-        Math.floor(
-            Math.random() * possibleCDs.length
-        );
+        Math.floor(Math.random() * possibleCDs.length);
 
-
-    const randomAlbum =
-        possibleCDs[randomNumber];
-
+    const randomAlbum = possibleCDs[randomNumber];
 
     window.location.href =
-        "album.html?id=" + randomAlbum.id;
+        "album.html?id=" + encodeURIComponent(randomAlbum.id);
 
 }
 
 
-/* COLLECTION COUNT */
+/* =========================================
+   COLLECTION COUNT
+========================================= */
 
 const collectionCount =
     document.getElementById("collection-count");
 
-
 if (collectionCount) {
-
-    collectionCount.textContent =
-        cds.length;
-
+    collectionCount.textContent = cds.length;
 }
 
 
-/* ARCHIVE ELEMENTS */
+/* =========================================
+   ARCHIVE ELEMENTS
+========================================= */
 
 const collection =
     document.getElementById("collection");
 
 const searchInput =
-    document.getElementById("search");
+    document.getElementById("archive-search");
 
 const sortSelect =
-    document.getElementById("sort");
+    document.getElementById("archive-sort");
+
+const genreSelect =
+    document.getElementById("archive-genre");
+
+const styleSelect =
+    document.getElementById("archive-style");
 
 
-/* BUILD ARCHIVE */
+/* =========================================
+   SPLIT GENRES AND STYLES
+========================================= */
+
+function splitCategories(value) {
+
+    if (typeof value !== "string") {
+        return [];
+    }
+
+    return value
+        .split(",")
+        .map(function(item) {
+            return item.trim();
+        })
+        .filter(function(item) {
+            return item !== "";
+        });
+
+}
+
+
+/* =========================================
+   POPULATE GENRE FILTER
+========================================= */
+
+function populateFilters() {
+
+    const genres = new Set();
+
+    cds.forEach(function(cd) {
+
+        splitCategories(cd.genre).forEach(function(genre) {
+            genres.add(genre);
+        });
+
+    });
+
+
+    /* ADD GENRE OPTIONS */
+
+    if (genreSelect) {
+
+        genreSelect.innerHTML =
+            '<option value="all">all genres</option>';
+
+        Array.from(genres)
+            .sort(function(a, b) {
+                return a.localeCompare(b);
+            })
+            .forEach(function(genre) {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = genre;
+                option.textContent = genre;
+
+                genreSelect.appendChild(option);
+
+            });
+
+    }
+
+
+    /* POPULATE STYLES */
+
+    updateStyleFilter();
+
+}
+
+
+/* =========================================
+   UPDATE STYLE FILTER BASED ON GENRE
+========================================= */
+
+function updateStyleFilter() {
+
+    if (!styleSelect) {
+        return;
+    }
+
+    const selectedGenre = genreSelect
+        ? genreSelect.value
+        : "all";
+
+    const previousStyle = styleSelect.value;
+
+    const availableStyles = new Set();
+
+
+    /* FIND STYLES FOR MATCHING GENRE */
+
+    cds.forEach(function(cd) {
+
+        const genres = splitCategories(cd.genre);
+
+        if (
+            selectedGenre === "all" ||
+            genres.includes(selectedGenre)
+        ) {
+
+            splitCategories(cd.style).forEach(function(style) {
+                availableStyles.add(style);
+            });
+
+        }
+
+    });
+
+
+    /* RESET STYLE OPTIONS */
+
+    styleSelect.innerHTML =
+        '<option value="all">all styles</option>';
+
+
+    /* ADD AVAILABLE STYLES */
+
+    Array.from(availableStyles)
+        .sort(function(a, b) {
+            return a.localeCompare(b);
+        })
+        .forEach(function(style) {
+
+            const option =
+                document.createElement("option");
+
+            option.value = style;
+            option.textContent = style;
+
+            styleSelect.appendChild(option);
+
+        });
+
+
+    /* KEEP PREVIOUS STYLE IF AVAILABLE */
+
+    if (availableStyles.has(previousStyle)) {
+
+        styleSelect.value = previousStyle;
+
+    } else {
+
+        styleSelect.value = "all";
+
+    }
+
+}
+
+
+/* =========================================
+   BUILD ARCHIVE
+========================================= */
 
 function displayCollection() {
 
@@ -72,50 +227,83 @@ function displayCollection() {
 
     /* SEARCH */
 
-    const searchTerm =
-        searchInput
-            ? searchInput.value.toLowerCase().trim()
-            : "";
+    const searchTerm = searchInput
+        ? searchInput.value.toLowerCase().trim()
+        : "";
 
 
-    let filteredCDs =
-        cds.filter(function(cd) {
+    /* GENRE */
 
-            const artist =
-                cd.artist
-                    ? cd.artist.toLowerCase()
-                    : "";
-
-            const album =
-                cd.album
-                    ? cd.album.toLowerCase()
-                    : "";
+    const selectedGenre = genreSelect
+        ? genreSelect.value
+        : "all";
 
 
-            return (
-                artist.includes(searchTerm) ||
-                album.includes(searchTerm)
-            );
+    /* STYLE */
 
-        });
+    const selectedStyle = styleSelect
+        ? styleSelect.value
+        : "all";
 
 
-    /* SORT */
+    /* FILTER CDS */
+
+    let filteredCDs = cds.filter(function(cd) {
+
+        const artist =
+            (cd.artist || "").toLowerCase();
+
+        const album =
+            (cd.album || "").toLowerCase();
+
+        const matchesSearch =
+            artist.includes(searchTerm) ||
+            album.includes(searchTerm);
+
+        const matchesGenre =
+            selectedGenre === "all" ||
+            splitCategories(cd.genre).includes(selectedGenre);
+
+        const matchesStyle =
+            selectedStyle === "all" ||
+            splitCategories(cd.style).includes(selectedStyle);
+
+        return (
+            matchesSearch &&
+            matchesGenre &&
+            matchesStyle
+        );
+
+    });
+
+
+    /* =====================================
+       SORT CDS
+    ===================================== */
 
     if (sortSelect) {
 
-        const sortType =
-            sortSelect.value;
+        const sortType = sortSelect.value;
+
+
+        /* ORIGINAL ORDER */
+
+        if (sortType === "original") {
+
+            // Keep original cds.js order.
+
+        }
 
 
         /* ARTIST A-Z */
 
-        if (sortType === "artist") {
+        if (
+            sortType === "artist-az" ||
+            sortType === "artist"
+        ) {
 
             filteredCDs.sort(function(a, b) {
-
                 return a.artist.localeCompare(b.artist);
-
             });
 
         }
@@ -123,12 +311,13 @@ function displayCollection() {
 
         /* ARTIST Z-A */
 
-        if (sortType === "artist-reverse") {
+        if (
+            sortType === "artist-za" ||
+            sortType === "artist-reverse"
+        ) {
 
             filteredCDs.sort(function(a, b) {
-
                 return b.artist.localeCompare(a.artist);
-
             });
 
         }
@@ -140,13 +329,8 @@ function displayCollection() {
 
             filteredCDs.sort(function(a, b) {
 
-                if (a.year === null) {
-                    return 1;
-                }
-
-                if (b.year === null) {
-                    return -1;
-                }
+                if (typeof a.year !== "number") return 1;
+                if (typeof b.year !== "number") return -1;
 
                 return a.year - b.year;
 
@@ -161,13 +345,8 @@ function displayCollection() {
 
             filteredCDs.sort(function(a, b) {
 
-                if (a.year === null) {
-                    return 1;
-                }
-
-                if (b.year === null) {
-                    return -1;
-                }
+                if (typeof a.year !== "number") return 1;
+                if (typeof b.year !== "number") return -1;
 
                 return b.year - a.year;
 
@@ -182,13 +361,8 @@ function displayCollection() {
 
             filteredCDs.sort(function(a, b) {
 
-                if (a.price === null) {
-                    return 1;
-                }
-
-                if (b.price === null) {
-                    return -1;
-                }
+                if (typeof a.price !== "number") return 1;
+                if (typeof b.price !== "number") return -1;
 
                 return a.price - b.price;
 
@@ -203,13 +377,8 @@ function displayCollection() {
 
             filteredCDs.sort(function(a, b) {
 
-                if (a.price === null) {
-                    return 1;
-                }
-
-                if (b.price === null) {
-                    return -1;
-                }
+                if (typeof a.price !== "number") return 1;
+                if (typeof b.price !== "number") return -1;
 
                 return b.price - a.price;
 
@@ -224,13 +393,8 @@ function displayCollection() {
 
             filteredCDs.sort(function(a, b) {
 
-                if (a.rating === null) {
-                    return 1;
-                }
-
-                if (b.rating === null) {
-                    return -1;
-                }
+                if (typeof a.rating !== "number") return 1;
+                if (typeof b.rating !== "number") return -1;
 
                 return b.rating - a.rating;
 
@@ -241,39 +405,90 @@ function displayCollection() {
     }
 
 
-    /* CLEAR CURRENT ARCHIVE */
+    /* =====================================
+       CLEAR ARCHIVE
+    ===================================== */
 
     collection.innerHTML = "";
 
 
-    /* DISPLAY RESULTS */
+    /* NO RESULTS */
+
+    if (filteredCDs.length === 0) {
+
+        const message =
+            document.createElement("p");
+
+        message.textContent = "no CDs found";
+
+        message.style.gridColumn = "1 / -1";
+        message.style.textAlign = "center";
+
+        collection.appendChild(message);
+
+        return;
+
+    }
+
+
+    /* =====================================
+       DISPLAY CDS
+    ===================================== */
 
     filteredCDs.forEach(function(cd) {
 
         const card =
             document.createElement("div");
 
-
         card.className = "cd";
 
 
-        card.innerHTML = `
+        /* ALBUM LINK */
 
-            <a href="album.html?id=${cd.id}">
+        const link =
+            document.createElement("a");
 
-                <img
-                    src="${cd.image}"
-                    alt="${cd.artist} - ${cd.album}"
-                >
+        link.href =
+            "album.html?id=" + encodeURIComponent(cd.id);
 
-            </a>
 
-            <h3>${cd.artist}</h3>
+        /* ALBUM IMAGE */
 
-            <p>${cd.album}</p>
+        const image =
+            document.createElement("img");
 
-        `;
+        image.src = cd.image;
 
+        image.alt =
+            cd.artist + " - " + cd.album;
+
+        link.appendChild(image);
+
+
+        /* ARTIST */
+
+        const artist =
+            document.createElement("h3");
+
+        artist.textContent = cd.artist;
+
+
+        /* ALBUM */
+
+        const album =
+            document.createElement("p");
+
+        album.textContent = cd.album;
+
+
+        /* ADD TO CARD */
+
+        card.appendChild(link);
+        card.appendChild(artist);
+        card.appendChild(album);
+
+
+        /* ADD TO ARCHIVE */
 
         collection.appendChild(card);
 
@@ -282,12 +497,22 @@ function displayCollection() {
 }
 
 
-/* INITIAL ARCHIVE */
+/* =========================================
+   INITIALIZE ARCHIVE
+========================================= */
 
-displayCollection();
+if (collection) {
+
+    populateFilters();
+
+    displayCollection();
+
+}
 
 
-/* LIVE SEARCH */
+/* =========================================
+   LIVE SEARCH
+========================================= */
 
 if (searchInput) {
 
@@ -299,7 +524,9 @@ if (searchInput) {
 }
 
 
-/* LIVE SORT */
+/* =========================================
+   LIVE SORT
+========================================= */
 
 if (sortSelect) {
 
@@ -311,7 +538,40 @@ if (sortSelect) {
 }
 
 
-/* BASIC STATS */
+/* =========================================
+   LIVE GENRE FILTER
+========================================= */
+
+if (genreSelect) {
+
+    genreSelect.addEventListener("change", function() {
+
+        updateStyleFilter();
+
+        displayCollection();
+
+    });
+
+}
+
+
+/* =========================================
+   LIVE STYLE FILTER
+========================================= */
+
+if (styleSelect) {
+
+    styleSelect.addEventListener(
+        "change",
+        displayCollection
+    );
+
+}
+
+
+/* =========================================
+   BASIC STATS
+========================================= */
 
 const totalCDs =
     document.getElementById("total-cds");
@@ -335,7 +595,9 @@ const cityCount =
     document.getElementById("city-count");
 
 
-/* SCAVENGER STATS */
+/* =========================================
+   SCAVENGER STATS
+========================================= */
 
 const underThreeCount =
     document.getElementById("under-three-count");
@@ -365,56 +627,42 @@ const topCityCount =
     document.getElementById("top-city-count");
 
 
-/* CALCULATE STATS */
+/* =========================================
+   CALCULATE STATS
+========================================= */
 
-const CDsWithPrices =
-    cds.filter(function(cd) {
-
-        return cd.price !== null &&
-               typeof cd.price === "number";
-
-    });
+const CDsWithPrices = cds.filter(function(cd) {
+    return typeof cd.price === "number";
+});
 
 
 /* TOTAL CDS */
 
 if (totalCDs) {
 
-    totalCDs.textContent =
-        cds.length;
+    totalCDs.textContent = cds.length;
 
 }
 
 
 /* TOTAL SPENT */
 
-const spent =
-    CDsWithPrices.reduce(
-        function(total, cd) {
-            return total + cd.price;
-        },
-        0
-    );
-
+const spent = CDsWithPrices.reduce(function(total, cd) {
+    return total + cd.price;
+}, 0);
 
 if (totalSpent) {
 
-    totalSpent.textContent =
-        "€" + spent;
+    totalSpent.textContent = "€" + spent;
 
 }
 
 
 /* AVERAGE PRICE */
 
-if (
-    averagePrice &&
-    CDsWithPrices.length > 0
-) {
+if (averagePrice && CDsWithPrices.length > 0) {
 
-    const average =
-        spent / CDsWithPrices.length;
-
+    const average = spent / CDsWithPrices.length;
 
     averagePrice.textContent =
         "€" + average.toFixed(2);
@@ -424,18 +672,13 @@ if (
 
 /* CHEAPEST FIND */
 
-if (
-    cheapestPrice &&
-    CDsWithPrices.length > 0
-) {
+if (cheapestPrice && CDsWithPrices.length > 0) {
 
-    const cheapest =
-        Math.min(
-            ...CDsWithPrices.map(function(cd) {
-                return cd.price;
-            })
-        );
-
+    const cheapest = Math.min(
+        ...CDsWithPrices.map(function(cd) {
+            return cd.price;
+        })
+    );
 
     cheapestPrice.textContent =
         "€" + cheapest;
@@ -445,18 +688,13 @@ if (
 
 /* MOST EXPENSIVE FIND */
 
-if (
-    mostExpensivePrice &&
-    CDsWithPrices.length > 0
-) {
+if (mostExpensivePrice && CDsWithPrices.length > 0) {
 
-    const mostExpensive =
-        Math.max(
-            ...CDsWithPrices.map(function(cd) {
-                return cd.price;
-            })
-        );
-
+    const mostExpensive = Math.max(
+        ...CDsWithPrices.map(function(cd) {
+            return cd.price;
+        })
+    );
 
     mostExpensivePrice.textContent =
         "€" + mostExpensive;
@@ -468,16 +706,13 @@ if (
 
 if (artistCount) {
 
-    const artists =
-        new Set(
-            cds.map(function(cd) {
-                return cd.artist;
-            })
-        );
+    const artists = new Set(
+        cds.map(function(cd) {
+            return cd.artist;
+        })
+    );
 
-
-    artistCount.textContent =
-        artists.size;
+    artistCount.textContent = artists.size;
 
 }
 
@@ -486,199 +721,163 @@ if (artistCount) {
 
 if (cityCount) {
 
-    const cities =
-        new Set(
-            cds
-                .filter(function(cd) {
-                    return cd.where !== "";
-                })
-                .map(function(cd) {
-                    return cd.where;
-                })
-        );
+    const cities = new Set(
+        cds
+            .filter(function(cd) {
+                return cd.where && cd.where.trim() !== "";
+            })
+            .map(function(cd) {
+                return cd.where;
+            })
+    );
 
-
-    cityCount.textContent =
-        cities.size;
+    cityCount.textContent = cities.size;
 
 }
 
 
-/* €3 RULE */
+/* =========================================
+   €3 RULE
+========================================= */
+
+const underThree = CDsWithPrices.filter(function(cd) {
+    return cd.price <= 3;
+});
 
 if (underThreeCount) {
-
-    const underThree =
-        CDsWithPrices.filter(function(cd) {
-
-            return cd.price <= 3;
-
-        });
-
 
     underThreeCount.textContent =
         underThree.length;
 
+}
 
-    if (pricedCDs) {
+if (pricedCDs) {
 
-        pricedCDs.textContent =
-            CDsWithPrices.length;
+    pricedCDs.textContent =
+        CDsWithPrices.length;
 
-    }
+}
 
+if (threeEuroSuccess) {
 
-    /* SUCCESS RATE */
+    if (CDsWithPrices.length > 0) {
 
-    if (threeEuroSuccess) {
+        const successRate =
+            (underThree.length / CDsWithPrices.length) * 100;
 
-        if (CDsWithPrices.length > 0) {
+        threeEuroSuccess.textContent =
+            successRate.toFixed(0) + "%";
 
-            const successRate =
-                (
-                    underThree.length /
-                    CDsWithPrices.length
-                ) * 100;
+    } else {
 
-
-            threeEuroSuccess.textContent =
-                successRate.toFixed(0) + "%";
-
-        }
+        threeEuroSuccess.textContent = "0%";
 
     }
 
-
-    /* €1 FINDS */
-
-    if (oneEuroFinds) {
-
-        oneEuroFinds.textContent =
-            CDsWithPrices.filter(function(cd) {
-
-                return cd.price === 1;
-
-            }).length;
-
-    }
+}
 
 
-    /* €2 FINDS */
+/* €1 FINDS */
 
-    if (twoEuroFinds) {
+if (oneEuroFinds) {
 
-        twoEuroFinds.textContent =
-            CDsWithPrices.filter(function(cd) {
+    oneEuroFinds.textContent =
+        CDsWithPrices.filter(function(cd) {
+            return cd.price === 1;
+        }).length;
 
-                return cd.price === 2;
-
-            }).length;
-
-    }
+}
 
 
-    /* €3 FINDS */
+/* €2 FINDS */
 
-    if (threeEuroFinds) {
+if (twoEuroFinds) {
 
-        threeEuroFinds.textContent =
-            CDsWithPrices.filter(function(cd) {
+    twoEuroFinds.textContent =
+        CDsWithPrices.filter(function(cd) {
+            return cd.price === 2;
+        }).length;
 
-                return cd.price === 3;
-
-            }).length;
-
-    }
+}
 
 
-    /* OVER €3 FINDS */
+/* €3 FINDS */
 
-    if (overThreeFinds) {
+if (threeEuroFinds) {
 
-        overThreeFinds.textContent =
-            CDsWithPrices.filter(function(cd) {
+    threeEuroFinds.textContent =
+        CDsWithPrices.filter(function(cd) {
+            return cd.price === 3;
+        }).length;
 
-                return cd.price > 3;
-
-            }).length;
-
-    }
+}
 
 
-    /* MOST FOUND CITY */
+/* OVER €3 FINDS */
 
-    const cityTotals = {};
+if (overThreeFinds) {
 
+    overThreeFinds.textContent =
+        CDsWithPrices.filter(function(cd) {
+            return cd.price > 3;
+        }).length;
 
-    cds.forEach(function(cd) {
-
-        if (
-            cd.where &&
-            cd.where !== ""
-        ) {
-
-            if (!cityTotals[cd.where]) {
-
-                cityTotals[cd.where] =
-                    0;
-
-            }
+}
 
 
-            cityTotals[cd.where]++;
+/* =========================================
+   MOST FOUND CITY
+========================================= */
 
-        }
+const cityTotals = {};
 
-    });
-
-
-    let mostFoundCity =
-        "";
-
-    let mostFoundCityCount =
-        0;
-
-
-    for (const city in cityTotals) {
-
-        if (
-            cityTotals[city] >
-            mostFoundCityCount
-        ) {
-
-            mostFoundCity =
-                city;
-
-            mostFoundCityCount =
-                cityTotals[city];
-
-        }
-
-    }
-
+cds.forEach(function(cd) {
 
     if (
-        topCity &&
-        mostFoundCity !== ""
+        typeof cd.where === "string" &&
+        cd.where.trim() !== ""
     ) {
 
-        topCity.textContent =
-            mostFoundCity;
+        if (!cityTotals[cd.where]) {
+            cityTotals[cd.where] = 0;
+        }
+
+        cityTotals[cd.where]++;
 
     }
 
+});
 
-    if (
-        topCityCount &&
-        mostFoundCity !== ""
-    ) {
+let mostFoundCity = "";
+let mostFoundCityCount = 0;
 
-        topCityCount.textContent =
-            mostFoundCityCount;
+for (const city in cityTotals) {
+
+    if (cityTotals[city] > mostFoundCityCount) {
+
+        mostFoundCity = city;
+        mostFoundCityCount = cityTotals[city];
 
     }
 
-    /* ESTIMATED MARKET VALUE */
+}
+
+if (topCity) {
+
+    topCity.textContent = mostFoundCity || "—";
+
+}
+
+if (topCityCount) {
+
+    topCityCount.textContent = mostFoundCityCount;
+
+}
+
+
+/* =========================================
+   ESTIMATED MARKET VALUE
+========================================= */
 
 const marketValueElement =
     document.getElementById("market-value");
@@ -697,7 +896,5 @@ if (marketValueElement) {
 
     marketValueElement.textContent =
         "€" + totalMarketValue.toFixed(0);
-
-}
 
 }

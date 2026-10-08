@@ -1,35 +1,41 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>scavenger - rarest finds</title>
+    <title>rarest finds - scavenger</title>
 
     <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
 
+    <!-- BACK TO HOMEPAGE -->
 
-    <!-- PAGE HEADER -->
+    <a href="index.html">
+        &lt;&lt;&lt; back to the pile
+    </a>
 
-    <a href="index.html"><<< back to the pile</a>
 
+    <!-- DESCRIPTION -->
 
     <p>
         some of the harder-to-find CDs i've scavenged.
     </p>
 
 
+    <!-- RAREST FINDS -->
+
     <h2>rarest finds</h2>
 
 
-    <!-- RARE CDS ARE GENERATED AUTOMATICALLY -->
+    <!-- CD COLLECTION -->
 
     <div
         class="collection"
@@ -41,12 +47,9 @@
 
     <script src="cds.js"></script>
 
-
     <script>
 
-        const rareCollection =
-            document.getElementById("rare-collection");
-
+        /* FIND RARE CDS */
 
         const rareCDs =
             cds.filter(function(cd) {
@@ -56,45 +59,88 @@
             });
 
 
+        /* COLLECTION ELEMENT */
+
+        const collection =
+            document.getElementById("rare-collection");
+
+
+        /* DISPLAY RARE CDS */
+
         rareCDs.forEach(function(cd) {
 
             const card =
                 document.createElement("div");
 
-
             card.className = "cd";
 
 
-            card.innerHTML = `
-                <a href="album.html?id=${cd.id}">
+            /* ALBUM LINK */
 
-                    <img
-                        src="${cd.image}"
-                        alt="${cd.artist} - ${cd.album}"
-                    >
+            const link =
+                document.createElement("a");
 
-                </a>
-
-                <h3>${cd.artist}</h3>
-
-                <p>${cd.album}</p>
-            `;
+            link.href =
+                "album.html?id=" +
+                encodeURIComponent(cd.id) +
+                "&from=rare";
 
 
-            rareCollection.appendChild(card);
+            /* ALBUM IMAGE */
+
+            const image =
+                document.createElement("img");
+
+            image.src = cd.image;
+
+            image.alt =
+                cd.artist + " - " + cd.album;
+
+            link.appendChild(image);
+
+
+            /* ARTIST */
+
+            const artist =
+                document.createElement("h3");
+
+            artist.textContent = cd.artist;
+
+
+            /* ALBUM */
+
+            const album =
+                document.createElement("p");
+
+            album.textContent = cd.album;
+
+
+            /* ADD CARD */
+
+            card.appendChild(link);
+            card.appendChild(artist);
+            card.appendChild(album);
+
+            collection.appendChild(card);
 
         });
 
 
+        /* NO RARE CDS */
+
         if (rareCDs.length === 0) {
 
-            rareCollection.innerHTML =
-                "<p>no rare finds added yet.</p>";
+            const message =
+                document.createElement("p");
+
+            message.textContent =
+                "no rare CDs added yet";
+
+            collection.appendChild(message);
 
         }
 
     </script>
-
 
 </body>
 

@@ -3,12 +3,15 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>scavenger</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -17,20 +20,52 @@
 
     <div class="album-nav">
 
-        <a href="index.html">
+        <!-- BACK BUTTON -->
+
+        <a href="index.html" id="album-back">
             &lt;&lt;&lt; back to the pile
         </a>
 
-        <a href="#"
-           class="reshuffle-box"
-           onclick="randomCD(); return false;">
-            shuffle
-        </a>
+
+        <!-- RIGHT SIDE NAVIGATION -->
+
+        <div class="album-nav-right">
+
+            <!-- PREVIOUS / NEXT -->
+
+            <div
+                class="album-pagination"
+                id="album-pagination"
+                style="display: none;"
+            >
+
+                <a id="previous-cd" href="#">
+                previous
+                </a>
+
+                <a id="next-cd" href="#">
+                    next
+                </a>
+
+            </div>
+
+
+            <!-- SHUFFLE -->
+
+            <a
+                href="#"
+                class="reshuffle-box"
+                onclick="randomCD(); return false;"
+            >
+                shuffle
+            </a>
+
+        </div>
 
     </div>
 
 
-    <!-- INFORMATION -->
+    <!-- INFORMATION HEADING -->
 
     <h2>information</h2>
 
@@ -43,12 +78,17 @@
 
         <div class="album-left">
 
+            <!-- ALBUM COVER -->
+
             <img
                 id="album-image"
                 class="album-photo"
                 src=""
                 alt=""
             >
+
+
+            <!-- ALBUM DETAILS -->
 
             <div class="album-details">
 
@@ -60,9 +100,13 @@
 
                 <p id="album-style"></p>
 
+
+                <!-- RATING -->
+
                 <div class="album-rating">
+
                     <strong id="album-rating"></strong>
-                    <span></span>
+
                 </div>
 
             </div>
@@ -83,7 +127,7 @@
 
             <div class="album-find-info">
 
-                <!-- LEFT: PRICE PAID -->
+                <!-- PRICE PAID -->
 
                 <div class="album-price-section">
 
@@ -96,7 +140,7 @@
                 </div>
 
 
-                <!-- RIGHT: MARKET VALUE, LOCATION, DATE -->
+                <!-- MARKET VALUE / LOCATION / DATE -->
 
                 <div class="album-find-details">
 
@@ -114,7 +158,7 @@
             </div>
 
 
-            <!-- FAVOURITE SONGS + FULL REVIEW -->
+            <!-- FAVOURITE SONGS + REVIEW -->
 
             <div class="album-bottom-row">
 
@@ -129,7 +173,7 @@
                 </div>
 
 
-                <!-- FULL REVIEW BUTTON -->
+                <!-- FULL REVIEW -->
 
                 <div id="review-container"></div>
 
@@ -140,7 +184,7 @@
     </div>
 
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT FILES -->
 
     <script src="cds.js"></script>
     <script src="script.js"></script>
@@ -148,18 +192,60 @@
 
     <script>
 
-        /* FIND CURRENT ALBUM */
+        /* =====================================
+           URL PARAMETERS
+        ===================================== */
 
         const params =
             new URLSearchParams(window.location.search);
 
-        const id =
-            params.get("id");
+        const id = params.get("id");
+        const from = params.get("from");
+        const city = params.get("city");
 
-        const album =
-            cds.find(function(cd) {
-                return cd.id === id;
-            });
+
+        /* =====================================
+           DYNAMIC BACK BUTTON
+        ===================================== */
+
+        const backButton =
+            document.getElementById("album-back");
+
+        if (from === "cities") {
+
+            backButton.textContent =
+                "<<< back to cities";
+
+            backButton.href =
+                "cities.html" +
+                (city
+                    ? "?city=" + encodeURIComponent(city)
+                    : "");
+
+        } else if (from === "rare") {
+
+            backButton.textContent =
+                "<<< back to rarest finds";
+
+            backButton.href = "rarest-finds.html";
+
+        } else {
+
+            backButton.textContent =
+                "<<< back to the pile";
+
+            backButton.href = "index.html";
+
+        }
+
+
+        /* =====================================
+           FIND CURRENT ALBUM
+        ===================================== */
+
+        const album = cds.find(function(cd) {
+            return cd.id === id;
+        });
 
 
         if (album) {
@@ -172,27 +258,38 @@
 
             /* ALBUM IMAGE */
 
-            document.getElementById("album-image").src =
-                album.image;
+            const albumImage =
+                document.getElementById("album-image");
 
-            document.getElementById("album-image").alt =
+            albumImage.src = album.image;
+
+            albumImage.alt =
                 album.artist + " - " + album.album;
 
 
-            /* ARTIST AND ALBUM */
+            /* ARTIST */
 
             document.getElementById("album-artist").textContent =
                 album.artist;
 
+
+            /* ALBUM TITLE */
+
             document.getElementById("album-title").textContent =
                 album.album;
 
+
+            /* YEAR AND GENRE */
+
             document.getElementById("album-year-genre").textContent =
                 (album.year ?? "year unknown") +
-                " / " + album.genre;
+                " / " + (album.genre || "");
+
+
+            /* STYLE */
 
             document.getElementById("album-style").textContent =
-                album.style;
+                album.style || "";
 
 
             /* RATING */
@@ -203,13 +300,17 @@
                     : "not rated";
 
 
-            /* PERSONAL NOTES */
+            /* =====================================
+               PERSONAL NOTES
+            ===================================== */
 
             document.getElementById("album-notes-text").textContent =
                 album.notes || "";
 
 
-            /* PRICE PAID */
+            /* =====================================
+               PRICE PAID
+            ===================================== */
 
             document.getElementById("album-price").textContent =
                 typeof album.price === "number"
@@ -217,7 +318,9 @@
                     : "not recorded";
 
 
-            /* MARKET VALUE FOR RARE CDS */
+            /* =====================================
+               MARKET VALUE
+            ===================================== */
 
             const marketValueElement =
                 document.getElementById("album-market-value");
@@ -240,19 +343,25 @@
             }
 
 
-            /* LOCATION */
+            /* =====================================
+               LOCATION
+            ===================================== */
 
             document.getElementById("album-location").textContent =
                 "where: " + (album.where || "not recorded");
 
 
-            /* DATE FOUND */
+            /* =====================================
+               DATE
+            ===================================== */
 
             document.getElementById("album-date").textContent =
                 "when: " + (album.when || "not recorded");
 
 
-            /* FAVOURITE SONGS */
+            /* =====================================
+               FAVOURITE SONGS
+            ===================================== */
 
             const songsElement =
                 document.getElementById("album-songs");
@@ -269,8 +378,6 @@
                         })
                         .join("\n");
 
-                songsElement.style.whiteSpace = "pre-line";
-
             } else {
 
                 songsElement.textContent =
@@ -279,7 +386,9 @@
             }
 
 
-            /* FULL REVIEW */
+            /* =====================================
+               FULL REVIEW
+            ===================================== */
 
             if (album.reviewPage) {
 
@@ -295,6 +404,117 @@
 
                 document.getElementById("review-container")
                     .appendChild(reviewLink);
+
+            }
+
+
+            /* =====================================
+               CONTEXT-AWARE PREVIOUS / NEXT
+            ===================================== */
+
+            let navigationCDs = cds;
+
+
+            /* RAREST FINDS */
+
+            if (from === "rare") {
+
+                navigationCDs = cds.filter(function(cd) {
+                    return cd.rare === true;
+                });
+
+            }
+
+
+            /* CITIES */
+
+            if (from === "cities" && city) {
+
+                navigationCDs = cds.filter(function(cd) {
+
+                    return (
+                        typeof cd.where === "string" &&
+                        cd.where.trim() === city
+                    );
+
+                });
+
+            }
+
+
+            /* FIND CURRENT POSITION */
+
+            const currentIndex =
+                navigationCDs.findIndex(function(cd) {
+                    return cd.id === album.id;
+                });
+
+
+            /* ONLY SHOW IF MULTIPLE CDS */
+
+            if (
+                navigationCDs.length > 1 &&
+                currentIndex !== -1
+            ) {
+
+                const previousIndex =
+                    (currentIndex - 1 + navigationCDs.length) %
+                    navigationCDs.length;
+
+                const nextIndex =
+                    (currentIndex + 1) %
+                    navigationCDs.length;
+
+
+                const previousAlbum =
+                    navigationCDs[previousIndex];
+
+                const nextAlbum =
+                    navigationCDs[nextIndex];
+
+
+                /* PRESERVE CONTEXT */
+
+                let context = "";
+
+                if (from === "rare") {
+
+                    context = "&from=rare";
+
+                } else if (from === "cities") {
+
+                    context = "&from=cities";
+
+                    if (city) {
+
+                        context +=
+                            "&city=" + encodeURIComponent(city);
+
+                    }
+
+                }
+
+
+                /* PREVIOUS LINK */
+
+                document.getElementById("previous-cd").href =
+                    "album.html?id=" +
+                    encodeURIComponent(previousAlbum.id) +
+                    context;
+
+
+                /* NEXT LINK */
+
+                document.getElementById("next-cd").href =
+                    "album.html?id=" +
+                    encodeURIComponent(nextAlbum.id) +
+                    context;
+
+
+                /* SHOW NAVIGATION */
+
+                document.getElementById("album-pagination")
+                    .style.display = "flex";
 
             }
 

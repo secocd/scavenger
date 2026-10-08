@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>cities - scavenger</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- BACK TO HOMEPAGE -->
+
+    <a href="index.html">
+        &lt;&lt;&lt; back to the pile
+    </a>
+
+
+    <!-- DESCRIPTION -->
+
+    <p>
+        all the places where i've found CDs.
+    </p>
+
+
+    <!-- CITY SELECTION -->
+
+    <h2>scavenging locations</h2>
+
+    <div id="city-list" class="city-list"></div>
+
+
+    <!-- CD COLLECTION -->
+
+    <div
+        id="city-collection"
+        class="collection"
+    ></div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="cds.js"></script>
+
+    <script>
+
+        /* READ CITY FROM URL */
+
+        const cityParams =
+            new URLSearchParams(window.location.search);
+
+        let selectedCity =
+            cityParams.get("city") || "all";
+
+
+        /* GET ALL CITIES */
+
+        const cities = {};
+
+        cds.forEach(function(cd) {
+
+            if (
+                typeof cd.where === "string" &&
+                cd.where.trim() !== ""
+            ) {
+
+                const city = cd.where.trim();
+
+                if (!cities[city]) {
+                    cities[city] = 0;
+                }
+
+                cities[city]++;
+
+            }
+
+        });
+
+
+        /* SORT CITIES */
+
+        const sortedCities =
+            Object.keys(cities).sort(function(a, b) {
+
+                return cities[b] - cities[a] ||
+                       a.localeCompare(b);
+
+            });
+
+
+        /* DISPLAY CITY BUTTONS */
+
+        function displayCities() {
+
+            const cityList =
+                document.getElementById("city-list");
+
+            cityList.innerHTML = "";
+
+
+            /* ALL CITIES */
+
+            const allButton =
+                document.createElement("button");
+
+            allButton.className = "city-box";
+
+            allButton.textContent = "all cities";
+
+            allButton.addEventListener("click", function() {
+
+                selectedCity = "all";
+
+                displayCities();
+                displayCityCollection();
+
+            });
+
+            if (selectedCity === "all") {
+                allButton.classList.add("city-active");
+            }
+
+            cityList.appendChild(allButton);
+
+
+            /* INDIVIDUAL CITIES */
+
+            sortedCities.forEach(function(city) {
+
+                const button =
+                    document.createElement("button");
+
+                button.className = "city-box";
+
+
+                const name =
+                    document.createElement("strong");
+
+                name.textContent = city;
+
+
+                const count =
+                    document.createElement("span");
+
+                count.textContent =
+                    cities[city] +
+                    (cities[city] === 1 ? " CD" : " CDs");
+
+
+                button.appendChild(name);
+                button.appendChild(count);
+
+
+                button.addEventListener("click", function() {
+
+                    selectedCity = city;
+
+                    displayCities();
+                    displayCityCollection();
+
+                });
+
+
+                if (selectedCity === city) {
+                    button.classList.add("city-active");
+                }
+
+
+                cityList.appendChild(button);
+
+            });
+
+        }
+
+
+        /* DISPLAY CDS */
+
+        function displayCityCollection() {
+
+            const collection =
+                document.getElementById("city-collection");
+
+
+            /* FILTER BY CITY */
+
+            const filteredCDs =
+                cds.filter(function(cd) {
+
+                    if (selectedCity === "all") {
+                        return true;
+                    }
+
+                    return (
+                        typeof cd.where === "string" &&
+                        cd.where.trim() === selectedCity
+                    );
+
+                });
+
+
+            /* CLEAR COLLECTION */
+
+            collection.innerHTML = "";
+
+
+            /* DISPLAY ALBUMS */
+
+            filteredCDs.forEach(function(cd) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "cd";
+
+
+                /* ALBUM LINK */
+
+                const link =
+                    document.createElement("a");
+
+                link.href =
+                    "album.html?id=" +
+                    encodeURIComponent(cd.id) +
+                    "&from=cities" +
+                    (selectedCity !== "all"
+                        ? "&city=" +
+                          encodeURIComponent(selectedCity)
+                        : "");
+
+
+                /* ALBUM COVER */
+
+                const image =
+                    document.createElement("img");
+
+                image.src = cd.image;
+
+                image.alt =
+                    cd.artist + " - " + cd.album;
+
+                link.appendChild(image);
+
+
+                /* ARTIST */
+
+                const artist =
+                    document.createElement("h3");
+
+                artist.textContent = cd.artist;
+
+
+                /* ALBUM */
+
+                const album =
+                    document.createElement("p");
+
+                album.textContent = cd.album;
+
+
+                /* ADD CARD */
+
+                card.appendChild(link);
+                card.appendChild(artist);
+                card.appendChild(album);
+
+                collection.appendChild(card);
+
+            });
+
+
+            /* NO RESULTS */
+
+            if (filteredCDs.length === 0) {
+
+                const message =
+                    document.createElement("p");
+
+                message.textContent = "no CDs found";
+
+                collection.appendChild(message);
+
+            }
+
+        }
+
+
+        /* INITIALIZE */
+
+        displayCities();
+        displayCityCollection();
+
+    </script>
+
+</body>
+
+</html>

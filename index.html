@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,8 +45,6 @@
 
         <div class="archive-menu">
 
-           
-
             <a
                 href="#"
                 class="toolbar-box"
@@ -54,83 +53,99 @@
                 random CD
             </a>
 
-            <a href="rarest-finds.html" class="toolbar-box">
+            <a
+                href="rarest-finds.html"
+                class="toolbar-box"
+            >
                 rarest finds
             </a>
 
-             <a href="stats.html" class="toolbar-box">
+            <a href="cities.html" class="toolbar-box">
+                cities
+            </a>
+
+            <a
+                href="stats.html"
+                class="toolbar-box"
+            >
                 stats
             </a>
-            
-            <a href="about.html" class="toolbar-box">
+
+            <a
+                href="about.html"
+                class="toolbar-box"
+            >
                 about
             </a>
 
         </div>
 
 
-        <!-- SEARCH + SORT -->
+        <!-- SEARCH, SORT AND FILTERS -->
 
-        <div class="search-sort">
-
-            <input
-                type="text"
-                id="search"
-                class="archive-search"
-                placeholder="search artist or album..."
-            >
+        <div class="archive-controls">
 
 
-            <select
-                id="sort"
-                class="archive-sort"
-            >
+            <!-- FIRST ROW: SEARCH + SORT -->
 
-                <option value="default">
-                    original order
-                </option>
+            <div class="search-sort">
 
-                <option value="artist">
-                    artist A-Z
-                </option>
+                <input
+                    type="text"
+                    id="archive-search"
+                    class="archive-search"
+                    placeholder="search artist or album..."
+                >
 
-                <option value="artist-reverse">
-                    artist Z-A
-                </option>
+                <select
+                    id="archive-sort"
+                    class="archive-sort"
+                >
+                    <option value="original">original order</option>
+                    <option value="artist-az">artist A-Z</option>
+                    <option value="artist-za">artist Z-A</option>
+                    <option value="year-new">newest album</option>
+                    <option value="year-old">oldest album</option>
+                    <option value="rating-high">highest rated</option>
+                    <option value="price-low">lowest price</option>
+                </select>
 
-                <option value="year-old">
-                    oldest album
-                </option>
-
-                <option value="year-new">
-                    newest album
-                </option>
-
-                <option value="price-low">
-                    lowest price
-                </option>
-
-                <option value="price-high">
-                    highest price
-                </option>
-
-                <option value="rating-high">
-                    highest rated
-                </option>
-
-            </select>
-
-        </div>
-
-    </div>
+            </div>
 
 
-    <!-- ARCHIVE -->
+            <!-- SECOND ROW: GENRE + STYLE -->
+
+            <div class="filter-row">
+
+                <select
+                    id="archive-genre"
+                    class="archive-filter"
+                >
+                    <option value="all">all genres</option>
+                </select>
+
+                <select
+                    id="archive-style"
+                    class="archive-filter"
+                >
+                    <option value="all">all styles</option>
+                </select>
+
+            </div>
+
+
+        </div> <!-- END ARCHIVE CONTROLS -->
+
+
+    </div> <!-- END ARCHIVE TOOLBAR -->
+
+
+    <!-- ARCHIVE HEADING -->
 
     <h2>archive</h2>
 
 
-    <!-- CDS ARE GENERATED AUTOMATICALLY -->
+    <!-- CD COLLECTION -->
 
     <div
         class="collection"
