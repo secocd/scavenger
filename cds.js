@@ -381,7 +381,7 @@ notes: "A friend sent me a few songs from this album years ago, but I didn't rea
     year: 1999,
     genre: "Rock",
     style: "Post Rock",
-    rating: null,
+    rating: 7,
     price: 5,
     marketValue: 10,
     where: "Paris",

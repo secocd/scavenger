@@ -328,14 +328,29 @@ hr {
 }
 
 
+/* FAVOURITE SONGS + FULL REVIEW */
+
+.album-bottom-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-top: 30px;
+}
+
+
 /* FAVOURITE SONGS */
 
 .album-favourites {
-    margin-top: 30px;
+    flex: 1;
+    min-width: 0;
+    margin-top: 0;
 }
 
 .album-favourites h3 {
     font-size: 18px;
+    margin-top: 0;
     margin-bottom: 10px;
 }
 
@@ -343,6 +358,39 @@ hr {
     font-size: 15px;
     line-height: 1.7;
     white-space: pre-line;
+}
+
+
+/* FULL REVIEW CONTAINER */
+
+#review-container {
+    flex-shrink: 0;
+}
+
+
+/* FULL REVIEW BUTTON */
+
+.review-box {
+    display: block;
+    width: 190px;
+
+    margin-top: 0;
+    padding: 12px;
+
+    border: 2px dashed #fdfdfd;
+    background-color: white;
+
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+
+    box-sizing: border-box;
+}
+
+.review-box:hover {
+    background-color: #f200ff;
+    color: white;
 }
 
 
@@ -377,32 +425,6 @@ hr {
 }
 
 .reshuffle-box:hover {
-    background-color: #f200ff;
-    color: white;
-}
-
-
-/* FULL REVIEWS */
-
-.review-box {
-    display: block;
-    width: 250px;
-
-    margin-top: 40px;
-    padding: 15px;
-
-    border: 2px dashed #fdfdfd;
-    background-color: white;
-
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-
-    box-sizing: border-box;
-}
-
-.review-box:hover {
     background-color: #f200ff;
     color: white;
 }
@@ -646,6 +668,19 @@ hr {
 
     .album-price-section {
         width: 100%;
+    }
+
+    .album-bottom-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #review-container {
+        width: 100%;
+    }
+
+    .review-box {
+        width: 190px;
     }
 
 }
