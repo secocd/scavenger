@@ -3,14 +3,12 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>scavenger</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -19,21 +17,27 @@
 
     <div class="album-nav">
 
-        <a href="index.html">&lt;&lt;&lt; back to the pile</a>
+        <a href="index.html">
+            &lt;&lt;&lt; back to the pile
+        </a>
 
-        <a href="#" class="reshuffle-box" onclick="randomCD(); return false;">
+        <a href="#"
+           class="reshuffle-box"
+           onclick="randomCD(); return false;">
             shuffle
         </a>
 
     </div>
 
 
-    <!-- INFORMATION -->
-
     <h2>information</h2>
 
 
+    <!-- ALBUM LAYOUT -->
+
     <div class="album-layout">
+
+        <!-- LEFT SIDE -->
 
         <div class="album-left">
 
@@ -44,12 +48,27 @@
                 alt=""
             >
 
-            <p id="album-info"></p>
+            <div class="album-details">
+
+                <h3 id="album-artist"></h3>
+
+                <p id="album-title"></p>
+
+                <p id="album-year-genre"></p>
+
+                <p id="album-style"></p>
+
+                <div class="album-rating">
+                    <strong id="album-rating"></strong>
+                    <span></span>
+                </div>
+
+            </div>
 
         </div>
 
 
-        <!-- ALBUM NOTES -->
+        <!-- RIGHT SIDE -->
 
         <div class="album-notes">
 
@@ -57,20 +76,52 @@
 
             <p id="album-notes-text"></p>
 
-            <p id="album-price"></p>
 
-            <!-- MARKET VALUE FOR RARE CDS -->
+            <!-- FIND INFORMATION BOX -->
 
-            <p id="album-market-value" style="display: none;"></p>
+            <div class="album-find-info">
 
-            <p id="album-location"></p>
+                <!-- LEFT: PRICE PAID -->
 
-            <p id="album-date"></p>
+                <div class="album-price-section">
 
-            <p>
-                favourite songs:<br>
-                <span id="album-songs"></span>
-            </p>
+                    <span class="album-small-label">
+                        price paid
+                    </span>
+
+                    <strong id="album-price"></strong>
+
+                </div>
+
+
+                <!-- RIGHT: MARKET VALUE, LOCATION, DATE -->
+
+                <div class="album-find-details">
+
+                    <p
+                        id="album-market-value"
+                        style="display: none;"
+                    ></p>
+
+                    <p id="album-location"></p>
+
+                    <p id="album-date"></p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAVOURITE SONGS -->
+
+            <div class="album-favourites">
+
+                <h3>favourite songs:</h3>
+
+                <p id="album-songs"></p>
+
+            </div>
+
 
             <!-- FULL REVIEW -->
 
@@ -120,16 +171,28 @@
                 album.artist + " - " + album.album;
 
 
-            /* ALBUM INFORMATION */
+            /* ARTIST AND ALBUM */
 
-            document.getElementById("album-info").innerHTML =
-                "artist: " + album.artist + "<br>" +
-                "album: " + album.album + "<br>" +
-                "year: " + (album.year ?? "not rated") + "<br>" +
-                "genre: " + album.genre + "<br>" +
-                "style: " + album.style + "<br><br>" +
-                "my rating: " +
-                (album.rating == null ? "not rated yet" : album.rating + "/10");
+            document.getElementById("album-artist").textContent =
+                album.artist;
+
+            document.getElementById("album-title").textContent =
+                album.album;
+
+            document.getElementById("album-year-genre").textContent =
+                (album.year ?? "year unknown") +
+                " / " + album.genre;
+
+            document.getElementById("album-style").textContent =
+                album.style;
+
+
+            /* RATING */
+
+            document.getElementById("album-rating").textContent =
+                typeof album.rating === "number"
+                    ? album.rating + "/10"
+                    : "not rated";
 
 
             /* PERSONAL NOTES */
@@ -141,10 +204,9 @@
             /* PRICE PAID */
 
             document.getElementById("album-price").textContent =
-                "price paid for the CD: " +
-                (typeof album.price === "number"
+                typeof album.price === "number"
                     ? "€" + album.price
-                    : "not recorded");
+                    : "not recorded";
 
 
             /* MARKET VALUE FOR RARE CDS */
@@ -158,7 +220,8 @@
             ) {
 
                 marketValueElement.textContent =
-                    "estimated market value: €" + album.marketValue;
+                    "estimated market value: €" +
+                    album.marketValue;
 
                 marketValueElement.style.display = "block";
 
@@ -216,8 +279,11 @@
                     document.createElement("a");
 
                 reviewLink.href = album.reviewPage;
+
                 reviewLink.className = "review-box";
-                reviewLink.textContent = "full review available!";
+
+                reviewLink.textContent =
+                    "full review available!";
 
                 document.getElementById("review-container")
                     .appendChild(reviewLink);
