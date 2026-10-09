@@ -26,7 +26,6 @@
             &lt;&lt;&lt; back to the pile
         </a>
 
-
         <!-- RIGHT SIDE NAVIGATION -->
 
         <div class="album-nav-right">
@@ -40,15 +39,14 @@
             >
 
                 <a id="previous-cd" href="#">
-                previous
+                    &larr; previous
                 </a>
 
                 <a id="next-cd" href="#">
-                    next
+                    next &rarr;
                 </a>
 
             </div>
-
 
             <!-- SHUFFLE -->
 
@@ -87,7 +85,6 @@
                 alt=""
             >
 
-
             <!-- ALBUM DETAILS -->
 
             <div class="album-details">
@@ -99,7 +96,6 @@
                 <p id="album-year-genre"></p>
 
                 <p id="album-style"></p>
-
 
                 <!-- RATING -->
 
@@ -139,7 +135,6 @@
 
                 </div>
 
-
                 <!-- MARKET VALUE / LOCATION / DATE -->
 
                 <div class="album-find-details">
@@ -172,7 +167,6 @@
 
                 </div>
 
-
                 <!-- FULL REVIEW -->
 
                 <div id="review-container"></div>
@@ -192,9 +186,7 @@
 
     <script>
 
-        /* =====================================
-           URL PARAMETERS
-        ===================================== */
+        /* URL PARAMETERS */
 
         const params =
             new URLSearchParams(window.location.search);
@@ -204,9 +196,7 @@
         const city = params.get("city");
 
 
-        /* =====================================
-           DYNAMIC BACK BUTTON
-        ===================================== */
+        /* DYNAMIC BACK BUTTON */
 
         const backButton =
             document.getElementById("album-back");
@@ -239,9 +229,7 @@
         }
 
 
-        /* =====================================
-           FIND CURRENT ALBUM
-        ===================================== */
+        /* FIND CURRENT ALBUM */
 
         const album = cds.find(function(cd) {
             return cd.id === id;
@@ -300,17 +288,13 @@
                     : "not rated";
 
 
-            /* =====================================
-               PERSONAL NOTES
-            ===================================== */
+            /* PERSONAL NOTES */
 
             document.getElementById("album-notes-text").textContent =
                 album.notes || "";
 
 
-            /* =====================================
-               PRICE PAID
-            ===================================== */
+            /* PRICE PAID */
 
             document.getElementById("album-price").textContent =
                 typeof album.price === "number"
@@ -318,9 +302,7 @@
                     : "not recorded";
 
 
-            /* =====================================
-               MARKET VALUE
-            ===================================== */
+            /* MARKET VALUE */
 
             const marketValueElement =
                 document.getElementById("album-market-value");
@@ -343,25 +325,19 @@
             }
 
 
-            /* =====================================
-               LOCATION
-            ===================================== */
+            /* LOCATION */
 
             document.getElementById("album-location").textContent =
                 "where: " + (album.where || "not recorded");
 
 
-            /* =====================================
-               DATE
-            ===================================== */
+            /* DATE */
 
             document.getElementById("album-date").textContent =
                 "when: " + (album.when || "not recorded");
 
 
-            /* =====================================
-               FAVOURITE SONGS
-            ===================================== */
+            /* FAVOURITE SONGS */
 
             const songsElement =
                 document.getElementById("album-songs");
@@ -386,9 +362,7 @@
             }
 
 
-            /* =====================================
-               FULL REVIEW
-            ===================================== */
+            /* FULL REVIEW */
 
             if (album.reviewPage) {
 
@@ -408,9 +382,7 @@
             }
 
 
-            /* =====================================
-               CONTEXT-AWARE PREVIOUS / NEXT
-            ===================================== */
+            /* CONTEXT-AWARE PREVIOUS / NEXT */
 
             let navigationCDs = cds;
 
