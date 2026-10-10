@@ -380,7 +380,7 @@ notes: "A friend sent me a few songs from this album years ago, but I didn't rea
     album: "Field Recordings from the Cook County Water Table",
     year: 1999,
     genre: "Rock",
-    style: "Post Rock",
+    style: "Post Rock, Ambient",
     rating: 7,
     price: 5,
     marketValue: 10,
